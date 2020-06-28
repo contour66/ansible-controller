@@ -9,11 +9,11 @@
     - name: Create eip 1 for load balancer
       ec2_eip:
         state: present
-        region: "{{ aws_region + 'a'}}"
+        region: "{{ aws_region }}"
       register: nlb_eip_1
 
     - name: Create eip 2 for load balancer
       ec2_eip:
         state: present
-        region: "{{ aws_region + 'c'}}"
+        region: "{{ aws_region }}"
       register: nlb_eip_2
