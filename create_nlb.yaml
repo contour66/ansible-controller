@@ -22,7 +22,7 @@
             Port: 443
             DefaultActions:
               - Type: forward
-                TargetGroupName: "{{ans-tg.target_group_name}"
+                TargetGroupName: "{{ans-tg.target_group_name}}"
         state: present
       register: ans_nlb
     - name: debug
