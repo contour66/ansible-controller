@@ -12,7 +12,7 @@
         region: "{{ aws_region }}"
         subnet_mappings:
           - SubnetId: "{{public_subnet_1.subnet.id}}"
-            AllocationId: "{{eip_1[0].allocation_id}}"
+            AllocationId: "{{eip_2.addresses[0].allocation_id}}"
           - SubnetId: "{{public_subnet_2.subnet.id}}"
             AllocationId: "{{eip_2[0].allocation_id}}"
         listeners:
