@@ -21,8 +21,8 @@
               - CertificateArn: "arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
             Port: 443
             DefaultActions:
-              - Type: Forward
-                TargetGroupName: ans-tg
+              - Type: forward
+                TargetGroupName: "{{ans-tg.target_group_name}"
         state: present
       register: ans_nlb
     - name: debug
