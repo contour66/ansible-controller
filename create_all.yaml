@@ -10,7 +10,7 @@
 - import_playbook: create_launch_template.yaml
 - import_playbook: create_target_group.yaml
 - import_playbook: destroy_nlb_eip.yaml
-- import_playbook: create_eip.yaml
+#- import_playbook: create_eip.yaml
 - import_playbook: create_nlb.yaml
 
 #- import_playbook: create_ec2.yaml
