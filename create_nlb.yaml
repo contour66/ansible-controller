@@ -9,9 +9,7 @@
     - name: Create netowrk load balancer
       elb_target_group:
         name: ans-nlb
-        zones:
-          - "{{ aws_region + 'a' }}"
-          - "{{ aws_region + 'c'}}"
+        region: "{{ aws_region }}"
         subnet_mappings:
           - SubnetId: "{{public_subnet_1.id}}"
             AllocationId: "{{nlb_ip_1}}"
