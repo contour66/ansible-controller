@@ -13,6 +13,8 @@
         subnet_mappings:
           - SubnetId: "{{public_subnet_1.subnet.id}}"
             AllocationId: "{{nlb_eip_1.allocation_id}}"
+          - SubnetId: "{{public_subnet_1.subnet.id}}"
+              AllocationId: "{{nlb_eip_1.allocation_id}}"
         listeners:
           - Protocol: TLS
             Certificates:
@@ -20,7 +22,7 @@
             Port: 443
             DefaultActions:
               - Type: Forward
-                TargetGroupName: "{{ans_tg.target_group_name}}"
+                TargetGroupName: ans-tg
         state: present
       register: ans_nlb
     - name: debug
