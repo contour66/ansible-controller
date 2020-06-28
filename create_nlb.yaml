@@ -11,9 +11,9 @@
         name: ans-nlb
         region: "{{ aws_region }}"
         subnet_mappings:
-          - SubnetId: "{{public_subnet_1.id}}"
+          - SubnetId: "{{public_subnet_1.subnet_id}}"
             AllocationId: "{{nlb_ip_1}}"
-          - SubnetId: "{{public_subnet_1.id}}"
+          - SubnetId: "{{public_subnet_2.subnet_id}}"
             AllocationId: "{{nlb_ip_2}}"
         listeners:
           - Protocol: TLS
