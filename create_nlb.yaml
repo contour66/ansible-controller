@@ -7,14 +7,14 @@
       region: "{{ aws_region }}"
   tasks:
     - name: Create netowrk load balancer
-      elb_target_group:
+      elb_network_lb:
         name: ans-nlb
         region: "{{ aws_region }}"
         subnet_mappings:
           - SubnetId: "{{public_subnet_1.subnet.id}}"
-            AllocationId: "{{nlb_ip_1}}"
+            AllocationId: "{{nlb_eip_1}}"
           - SubnetId: "{{public_subnet_2.subnet.id}}"
-            AllocationId: "{{nlb_ip_2}}"
+            AllocationId: "{{nlb_eip_2}}"
         listeners:
           - Protocol: TLS
             Certificates:
