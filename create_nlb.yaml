@@ -14,7 +14,7 @@
           - SubnetId: "{{public_subnet_1.subnet.id}}"
             AllocationId: "{{nlb_eip_1.allocation_id}}"
           - SubnetId: "{{public_subnet_1.subnet.id}}"
-              AllocationId: "{{nlb_eip_1.allocation_id}}"
+            AllocationId: "{{nlb_eip_1.allocation_id}}"
         listeners:
           - Protocol: TLS
             Certificates:
