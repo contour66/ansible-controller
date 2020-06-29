@@ -1,0 +1,23 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
+  tasks:
+    - Name: Creat auto-scaling group
+      ec2_asg:
+        name: ans-asg
+        load_balancers: "{{ans_nlb}}"
+        availability_zones: [ "{{ aws_region + 'a' }}", "{{ aws_region + 'c'}}" ]
+        launch_template:
+            version: '1'
+            launch_template_name: ansible_template
+        min_size: 4
+        max_size: 4
+        desired_capacity: 2
+        vpc_zone_identifier:
+          - "{{public_subnet_1.subnet.id}}"
+          - "{{public_subnet_1.subnet.id}}"
+      register: ans_asg

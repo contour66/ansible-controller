@@ -25,5 +25,5 @@
                 TargetGroupName: "{{ans_tg.target_group_name}}"
         state: present
       register: ans_nlb
-    - name: debug
-      debug: var=ans_nlb
+#    - name: debug
+#      debug: var=ans_nlb
