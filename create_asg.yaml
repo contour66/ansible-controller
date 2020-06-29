@@ -6,7 +6,7 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - Name: Creat auto-scaling group
+    - name: Creat auto-scaling group
       ec2_asg:
         name: ans-asg
         load_balancers: "{{ans_nlb}}"
