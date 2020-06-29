@@ -9,7 +9,7 @@
     - name: Creat auto-scaling group
       ec2_asg:
         name: ans-asg
-        load_balancers: "{{ans_nlb}}"
+        load_balancers: "ans-nlb"
         availability_zones: [ "{{ aws_region + 'a' }}", "{{ aws_region + 'c'}}" ]
         launch_template:
             version: '1'
