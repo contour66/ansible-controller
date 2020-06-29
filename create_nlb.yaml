@@ -7,23 +7,23 @@
       region: "{{ aws_region }}"
   tasks:
     - name: Create netowrk load balancer
-      elb_target_group:
+      elb_network_lb:
         name: ans-nlb
-        state: present
-        zones:
-          - us-west-1a
-          - us-east-1c
+        region: "{{ aws_region }}"
         subnet_mappings:
-          - SubnetId: "{{public_subnet_1.id}}"
-            AllocationId: "{{nlb_ip_1}}"
-          - SubnetId: "{{public_subnet_1.id}}"
-            AllocationId: "{{nlb_ip_2}}"
+          - SubnetId: "{{public_subnet_1.subnet.id}}"
+            AllocationId: "{{nlb_eip_1.addresses[0].allocation_id}}"
+          - SubnetId: "{{public_subnet_2.subnet.id}}"
+            AllocationId: "{{nlb_eip_2.addresses[0].allocation_id}}"
         listeners:
-          - protocol: TLS
+          - Protocol: TLS
             Certificates:
-              - CertificatiteArn: "arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
+              - CertificateArn: "arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
             Port: 443
-            DefaulatActions:
-              - Type: Forward
-                TargetGroupName: ans-tg
-        register: ans_nlb
+            DefaultActions:
+              - Type: forward
+                TargetGroupName: "{{ans_tg.target_group_name}}"
+        state: present
+      register: ans_nlb
+    - name: debug
+      debug: var=ans_nlb
