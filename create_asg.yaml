@@ -13,7 +13,7 @@
         launch_template:
             version: '1'
             launch_template_name: ansible_template
-        min_size: 4
+        min_size: 2
         max_size: 4
         desired_capacity: 2
         vpc_zone_identifier:
