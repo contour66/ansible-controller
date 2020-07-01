@@ -5,11 +5,11 @@
     ami_id: "ami-04e59c05167ea7bd5"
   module_defaults:
     group/aws:
-
       region: "us-west-1"
+
   tasks:
     - name: Provision Db Instance
-      ec2:
+      ec2_instance:
         key_name: zum
         assign_public_ip: yes
         iam_instance_profile: image-gallery-server-role
