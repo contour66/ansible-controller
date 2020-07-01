@@ -33,9 +33,10 @@
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
-        db: ansibleimagedb2
+        db: ans-rds-subnet
+        login_host: ansibleimagedb2.cfxeylolmgaa.us-west-1.rds.amazonaws.com
         login_user: postgres
-        login_password: tacos123
+        login_password: "{{ lookup('aws_secret', 'sec-ans-ig') }}"
         no_password_changes: no
         priv: ALL
         user: image_gallery
