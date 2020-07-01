@@ -49,7 +49,7 @@
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
         subnet: "{{rds_sng}}"
-        security_groups: "{{postgres_sg}}"
+        security_groups: ans-postgres-sg
         username: postgres
         password: postgres
         wait: yes
