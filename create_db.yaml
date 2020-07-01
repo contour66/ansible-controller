@@ -1,14 +1,31 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
+  tasks:
+    - name: Get db name
+      rds_instance_info:
+        db_instance_identifier: image-gallery
+     register: image_gallery
 
-
-
-
-- name: Create a DB instance using the default AWS KMS encryption key
-  rds_instance:
-    id: ans-db
-    state: present
-    engine: postgres
-    storage_encrypted: True
-    db_instance_class: db.t2.micrp
-    username: "{{ username }}"
-    password: "{{ password }}"
-    allocated_storage: "{{ allocated_storage }}"
+    - name: Create snapshot of db
+      rds_snapshot:
+        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
+        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
+      register: db_snap
+##
+#    - name: Create new db from snapshot
+#      rds:
+#        command: modify
+#        instance_name: image_gallery_ans
+#        db_engine: postgres
+#        size: 10
+#        instance_type: db.t2.micro
+#        username: postgres
+#        password: postgres
+#        tags:
+#          Name: ansible-db
+#      register: ans_db
