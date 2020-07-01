@@ -35,7 +35,8 @@
         tags:
           name: ansible_db
       register: ans_rds
-    -name: debug
+
+    - name: debug
      debug: var=ans_rds
 
 
