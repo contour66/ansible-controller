@@ -1,10 +1,10 @@
 - hosts: localhost
   gather_facts: no
-  vars:
-    aws_region: us-west-1
+#  vars:
+#    aws_region: us-west-1
   module_defaults:
     group/aws:
-      region: "{{ aws_region }}"
+      aws_region: us-west-1
   tasks:
     - name: Create VPC
       ec2_vpc_net:
