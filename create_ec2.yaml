@@ -45,7 +45,7 @@
         columns:
           - username varchar(100) primary key
           - password varchar(100)
-          - full_name (100)
+          - full_name varchar(100)
       register: users_table
 
     - name: Insert query to image_gallery
