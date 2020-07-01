@@ -12,5 +12,6 @@
 - import_playbook: create_eip.yaml
 - import_playbook: create_nlb.yaml
 - import_playbook: create_asg.yaml
+- import_playbook: create_db.yaml
 
 #- import_playbook: create_ec2.yaml
