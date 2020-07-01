@@ -48,7 +48,7 @@
         db_engine: postgres
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
-        subnet: "{{rds_sng}}"
+        subnet: "{{rds_sng.name}}"
         security_groups: ans-postgres-sg
         username: postgres
         password: postgres
