@@ -12,6 +12,7 @@
       ec2:
         key_name: zum
         assign_public_ip: yes
+        iam_instance_profile: image-gallery-server-role
         group:
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
@@ -24,6 +25,7 @@
         wait: yes
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
+        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') | b64encode }}"
         count_tag:
           Name: ans_Db_sql
       register: db_sql_ec2
