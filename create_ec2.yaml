@@ -2,7 +2,7 @@
   gather_facts: no
   vars:
     aws_region: "us-west-1"
-     ami_id: "ami-04e59c05167ea7bd5"
+    ami_id: "ami-04e59c05167ea7bd5"
   module_defaults:
     group/aws:
       region: "{{ aws_region }}"
