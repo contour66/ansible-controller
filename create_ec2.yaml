@@ -22,7 +22,7 @@
           Name: provision_postgres_instance
           Module: 5
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
-        exact_count: 1
+        count: 1
         state: present
         user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') | b64encode }}"
       register: db_sql_ec2
