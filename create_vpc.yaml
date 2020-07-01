@@ -16,8 +16,7 @@
         state: present
       register: vpc
 
-    - name: Return aws
-      register:
+
 #    - name: debug
 #      debug: var=vpc
 
