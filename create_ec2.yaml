@@ -12,7 +12,6 @@
       ec2_instance:
         key_name: zum
         assign_public_ip: yes
-        iam_instance_profile: image-gallery-server-role
         group:
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
