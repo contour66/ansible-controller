@@ -30,8 +30,8 @@
 #        security_groups: ans-postgres-sg
         username: postgres
         password: postgres
-        wait: yes
-        wait_timeout: 600
+#        wait: yes
+#        wait_timeout: 600
         tags:
           name: ansible_db
       register: ans_rds
