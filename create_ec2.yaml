@@ -1,31 +1,29 @@
----
 - hosts: localhost
   gather_facts: no
   vars:
-    ami_id: "ami-04e59c05167ea7bd5"
+    aws_region: "us-west-1"
+     ami_id: "ami-04e59c05167ea7bd5"
   module_defaults:
     group/aws:
-
-      region: "us-west-1"
+      region: "{{ aws_region }}"
   tasks:
     - name: Provision Db Instance
       ec2:
         key_name: zum
         assign_public_ip: yes
+        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
         group:
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
           - "{{dev_sg.group_name}}"
         instance_type: t2.micro
+        region: "{{ aws_region }}"
         image: "{{ ami_id }}"
         instance_profile_name: image-gallery-server-role
         instance_tags:
           Name: provision_postgres_instance
-          Module: 5
-        wait: yes
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
-        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
         count_tag:
           Name: ans_Db_sql
       register: db_sql
