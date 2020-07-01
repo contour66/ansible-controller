@@ -19,7 +19,7 @@
         instance_type: t2.micro
         image: "{{ ami_id }}"
         instance_tags:
-          Name: Db_sql
+          Name: provision_postgres_instance
           Module: 5
         wait: yes
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
@@ -30,7 +30,7 @@
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
-        db: ansibleimagedb2
+        db: "{{ans_rds.endpoint}}"
         login_user: postgres
         login_password: tacos123
         priv: ALL
