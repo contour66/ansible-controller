@@ -43,6 +43,7 @@
       rds:
         command: create
         instance_name: AnsibleImageDB
+        instance_type: db.t2.micro
         size: 10
         db_engine: postgres
         region: "{{ aws_region }}"
