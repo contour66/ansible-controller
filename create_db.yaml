@@ -22,14 +22,14 @@
         command: create
         instance_name: ansibleimagedb2
         instance_type: db.t2.micro
-        size: 10
+        size: '10'
         db_engine: postgres
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
         subnet: ans-rds-subnet
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
-        password: "{{ lookup('aws_secret', 'sec-ig-project-user-ig') }}"
+        password: "{{ lookup('aws_secret', 'sec-ans-ig') }}"
 #        wait: yes
 #        wait_timeout: 600
         tags:
