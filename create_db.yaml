@@ -37,7 +37,7 @@
       register: ans_rds
 
     - name: debug
-     debug: var=ans_rds
+      debug: var=ans_rds
 
 
 
