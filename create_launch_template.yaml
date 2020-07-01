@@ -20,7 +20,7 @@
           associate_public_ip_address: yes
           delete_on_termination: yes
           groups:
-            - "{{postgres_sg_tag.group_id}}"
+            - "{{postgres_tag_sg.group_id}}"
             - "{{dev_sg.group_id}}"
             - "{{nginx_sg.group_id}}"
         user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') | b64encode }}"
