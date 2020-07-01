@@ -14,7 +14,7 @@
         subnets:
           - "{{private_subnet_1.subnet.id}}"
           - "{{private_subnet_2.subnet.id}}"
-       register: rds_sng
+      register: rds_sng
 
     - - name: Create RDS instance with aws_secret lookup for password param
         rds:
