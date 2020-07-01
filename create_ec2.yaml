@@ -27,3 +27,26 @@
         count_tag:
           Name: ans_Db_sql
       register: db_sql
+
+    - name: Connect to database, create  user, and grant access to database and products table
+      postgresql_user:
+        db: ansibleimagedb2
+        name: image_gallery
+        roll_attr_flags: SUPERUSER
+        password: ceec4eif7ya
+      register: db_user
+
+    - name:
+      postgresql_table:
+        name: users
+        owner: image_gallery
+        columns:
+          - username varchar(100) primary key
+          - password varchar(100)
+          - full_name (100)
+      register: users_table
+
+    - name: Insert query to image_gallery
+      postgresql_query:
+        db: image_gallery
+        query: insert into users (username, password, full_name) values(%s, %s, %s);
