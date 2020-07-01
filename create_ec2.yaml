@@ -12,7 +12,7 @@
       ec2:
         key_name: zum
         assign_public_ip: yes
-        security_groups:
+        group:
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
           - "{{dev_sg.group_name}}"
