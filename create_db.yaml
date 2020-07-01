@@ -29,13 +29,23 @@
         subnet: ans-rds-subnet
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
-        password: postgres
+        password: "{{ lookup('aws_secret', 'sec-ig-project-user-ig') }}"
 #        wait: yes
 #        wait_timeout: 600
         tags:
           name: ansible_db
       register: ans_rds
+    -name: debug
+     debug: var=ans_rds
 
+
+
+#    - name: Create user test and grant group user_ro and user_rw to it
+#      postgresql_user:
+#        name: test
+#        groups:
+#          - user_ro
+#          - user_rw
   #
     #    - name: Create new db from snapshot
     #      rds:
