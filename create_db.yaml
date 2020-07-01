@@ -43,6 +43,7 @@
       rds:
         command: create
         instance_name: AnsibleImageDB
+        db_engine: postgres
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
         subnet: "{{rds_sng}}"
