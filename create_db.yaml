@@ -41,7 +41,7 @@
 
     - name: Create db  from snapshot
       rds:
-        command: restore
+        command: create
         snapshot: ansible-db-snap
         instance_name: AnsibleImageDB
         region: "{{ aws_region }}"
