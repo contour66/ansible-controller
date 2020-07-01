@@ -9,7 +9,7 @@
 
   tasks:
     - name: Provision Db Instance
-      ec2_instance:
+      ec2:
         key_name: zum
         assign_public_ip: yes
         security_groups:
