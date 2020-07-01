@@ -8,26 +8,26 @@
 
       region: "us-west-1"
   tasks:
-    - name: Provision Db Instance
-      ec2:
-        key_name: zum
-        assign_public_ip: yes
-        group:
-          - "{{postgres_tag_sg.group_name}}"
-          - "{{nginx_sg.group_name}}"
-          - "{{dev_sg.group_name}}"
-        instance_type: t2.micro
-        image: "{{ ami_id }}"
-        instance_tags:
-          Name: provision_postgres_instance
-          Module: 5
-        wait: yes
-        vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
-        exact_count: 1
-        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
-        count_tag:
-          Name: ans_Db_sql
-      register: db_sql
+#    - name: Provision Db Instance
+#      ec2:
+#        key_name: zum
+#        assign_public_ip: yes
+#        group:
+#          - "{{postgres_tag_sg.group_name}}"
+#          - "{{nginx_sg.group_name}}"
+#          - "{{dev_sg.group_name}}"
+#        instance_type: t2.micro
+#        image: "{{ ami_id }}"
+#        instance_tags:
+#          Name: provision_postgres_instance
+#          Module: 5
+#        wait: yes
+#        vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
+#        exact_count: 1
+#        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
+#        count_tag:
+#          Name: ans_Db_sql
+#      register: db_sql
 
     - name: debug
       debug: var=db_sql
