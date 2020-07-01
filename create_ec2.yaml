@@ -30,9 +30,11 @@
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
-        db: "{{ans_rds.endpoint}}"
+        db: ansibleimagedb2
+        login_host: "{{ans_rds.endpoint}}"
         login_user: postgres
         login_password: tacos123
+        no_password_changes: no
         priv: ALL
         user: image_gallery
         password: ceec4eif7ya
