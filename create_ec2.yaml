@@ -26,15 +26,15 @@
         exact_count: 1
         count_tag:
           Name: ans_Db_sql
-      register: db_sql
+      register: db_sql_ec2
 
     - name: debug
-      debug: var=db_sql
+      debug: var=db_sql_ec2
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
         db: ansibleimagedb2
-        login_host: "{{ans_rds.ec2_url}}"
+        login_host: "{{ans_rds.public_ip}}"
         login_user: postgres
         login_password: tacos123
         no_password_changes: no
