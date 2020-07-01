@@ -27,8 +27,9 @@
         count_tag:
           Name: ans_Db_sql
       register: db_sql
-    -name: debug
-     debug: var=db_sql
+
+    - name: debug
+      debug: var=db_sql
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
@@ -41,6 +42,9 @@
         user: image_gallery
         password: ceec4eif7ya
       register: db_user
+
+    - name: debug
+      debug: var=db_user
 
     - name:
       postgresql_table:
