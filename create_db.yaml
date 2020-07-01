@@ -6,16 +6,39 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - name: Get db name
-      rds_instance_info:
-        db_instance_identifier: image-gallery
-     register: image_gallery
+    - name: Create rds subnet
+      rds_subnet_group:
+        state: present
+        name: ans-rds-subnet
+        description: private subnet for ansible rds
+        subnets:
+          - "{{private_subnet_1.subnet.id}}"
+          - "{{private_subnet_2.subnet.id}}"
+       register: rds_sng
 
-    - name: Create snapshot of db
-      rds_snapshot:
-        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
-        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
-      register: db_snap
+    - - name: Create RDS instance with aws_secret lookup for password param
+        rds:
+          command: create
+          instance_name: ans_image_gallery_db
+          db_engine: postgres
+          size: 10
+          instance_type: db.m1.small
+          username: postgres
+          password: postgres
+          tags:
+            Name: AnsibleDb
+        register: ans_db
+#
+#    - name: Get db name
+#      rds_instance_info:
+#        db_instance_identifier: image-gallery
+#     register: image_gallery
+#
+#    - name: Create snapshot of db
+#      rds_snapshot:
+#        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
+#        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
+#      register: db_snap
 ##
 #    - name: Create new db from snapshot
 #      rds:
