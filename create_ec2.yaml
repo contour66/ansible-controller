@@ -27,11 +27,13 @@
         count_tag:
           Name: ans_Db_sql
       register: db_sql
+    -name: debug
+     debug: var=db_sql
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
         db: ansibleimagedb2
-        login_host: localhost
+        login_host: "{{db_sql.endpoint}}"
         login_user: postgres
         login_password: tacos123
         no_password_changes: no
