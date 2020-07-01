@@ -42,13 +42,13 @@
     - name: Create db  from snapshot
       rds:
         command: create
-        snapshot: ansible-db-snap
         instance_name: AnsibleImageDB
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
         subnet: "{{rds_sng}}"
         security_groups: "{{postgres_sg}}"
-        publicly_accessible: no
+        username: postgres
+        password: postgres
         wait: yes
         wait_timeout: 600
         tags:
