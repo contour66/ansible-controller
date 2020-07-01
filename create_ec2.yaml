@@ -33,7 +33,7 @@
         db: ansibleimagedb2
         login_user: postgres
         login_password: tacos123
-        roll_attr_flags: SUPERUSER
+        priv: ALL
         user: image_gallery
         password: ceec4eif7ya
       register: db_user
