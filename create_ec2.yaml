@@ -12,9 +12,9 @@
       ec2:
         key_name: zum
         group:
-          - "{{postgres_tag_sg.group_id}}"
-          - "{{nginx_sg.group_id}}"
-          - "{{postgres_sg.group_id}}"
+          - "{{postgres_tag_sg.group_name}}"
+          - "{{nginx_sg.group_name}}"
+          - "{{dev_sg.group_name}}"
         instance_type: t2.micro
         image: "{{ ami_id }}"
         instance_tags:
