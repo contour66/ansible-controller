@@ -24,11 +24,26 @@
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         count: 1
         state: present
-        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') | b64encode }}"
+        user_data:
+         - sudo yum install -y postgresql
+         - sudo yum install -y gcc
+         - sudo yum install -y python3-devel
+         - sudo yum install -y postgresql-devel
+         - sudo yum install -y jq # json parser
+         - sudo yum install -y git
+         - sudo pip3 install psycopg2
+         - sudo pip3 install boto3
+         - cd /home/ec2-user
+         - pip3 install --user boto3
+         - pip3 install --user psycopg2
+
       register: db_sql_ec2
 
     - name: debug
       debug: var=db_sql_ec2
+
+    - name: runs scripts
+
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
