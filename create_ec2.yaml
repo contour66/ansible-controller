@@ -24,7 +24,7 @@
         wait: yes
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
-        user_data: "{{ lookup('file', '/ec2-scripts/ec2-prod-bootstrap.sh') }}"
+        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
         count_tag:
           Name: ans_Db_sql
       register: db_sql
