@@ -18,12 +18,12 @@
           - "{{dev_sg.group_name}}"
         instance_type: t2.micro
         image: "{{ ami_id }}"
-        tags:
+        instance_tags:
           Name: provision_postgres_instance
           Module: 5
-        wait: yes
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
+        state: present
         user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') | b64encode }}"
       register: db_sql_ec2
 
