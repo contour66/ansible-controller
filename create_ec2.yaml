@@ -11,6 +11,7 @@
     - name: Provision Db Instance
       ec2:
         key_name: zum
+        assign_public_ip: yes
         group:
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
