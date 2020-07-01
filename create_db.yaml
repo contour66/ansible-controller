@@ -19,7 +19,7 @@
 ##
 #    - name: Create new db from snapshot
 #      rds:
-#        command: modify
+#        command: modifygit stat
 #        instance_name: image_gallery_ans
 #        db_engine: postgres
 #        size: 10
