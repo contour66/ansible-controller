@@ -31,8 +31,10 @@
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
         db: ansibleimagedb2
-        name: image_gallery
+        login_user: postgres
+        login_password: tacos123
         roll_attr_flags: SUPERUSER
+        name: image_gallery
         password: ceec4eif7ya
       register: db_user
 
