@@ -16,18 +16,18 @@
           - "{{private_subnet_2.subnet.id}}"
       register: rds_sng
 
-    - - name: Create RDS instance with aws_secret lookup for password param
-        rds:
-          command: create
-          instance_name: ans_image_gallery_db
-          db_engine: postgres
-          size: 10
-          instance_type: db.m1.small
-          username: postgres
-          password: postgres
-          tags:
-            Name: AnsibleDb
-        register: ans_db
+    - name: Create RDS instance with aws_secret lookup for password param
+      rds:
+        command: create
+        instance_name: ans_image_gallery_db
+        db_engine: postgres
+        size: 10
+        instance_type: db.m1.small
+        username: postgres
+        password: postgres
+        tags:
+          Name: AnsibleDb
+      register: ans_db
 #
 #    - name: Get db name
 #      rds_instance_info:
