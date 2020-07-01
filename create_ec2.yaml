@@ -5,8 +5,8 @@
     ami_id: "ami-04e59c05167ea7bd5"
   module_defaults:
     group/aws:
-      region: "us-west-1"
 
+      region: "us-west-1"
   tasks:
     - name: Provision Db Instance
       ec2:
@@ -21,29 +21,28 @@
         instance_tags:
           Name: provision_postgres_instance
           Module: 5
+        wait: yes
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
-        count: 1
-        state: present
-        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
-      register: db_sql_ec2
+        exact_count: 1
+        user_data: "{{ lookup('file', '/ec2-scripts/ec2-prod-bootstrap.sh') }}"
+        count_tag:
+          Name: ans_Db_sql
+      register: db_sql
 
     - name: debug
-      debug: var=db_sql_ec2
-
-
+      debug: var=db_sql
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
-        db: ans-rds-subnet
-        login_host: ansibleimagedb2.cfxeylolmgaa.us-west-1.rds.amazonaws.com
+        db: ansibleimagedb2
+        login_host: "{{db_sql.endpoint}}"
         login_user: postgres
-        login_password: "{{ lookup('aws_secret', 'sec-ans-ig') }}"
+        login_password: tacos123
         no_password_changes: no
         priv: ALL
         user: image_gallery
         password: ceec4eif7ya
       register: db_user
-
     - name: debug
       debug: var=db_user
 
