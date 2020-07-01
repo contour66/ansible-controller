@@ -28,23 +28,27 @@
 #        tags:
 #          Name: ansible-db
 #      register: ans_db
-
-    - name: Create snapshot of db
-      rds_snapshot:
-        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
-        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
-      register: db_snap
+#    - name: Get db name
+#      rds_instance_info:
+#        db_instance_identifier: image-gallery
+#        register: image_gallery
+#
+#    - name: Create snapshot of db
+#      rds_snapshot:
+#        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
+#        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
+#      register: db_snap
 
     - name: Create db  from snapshot
       rds:
-        command: create
-        snapshot: "{{db_snaps.db_snapshot_identifier}}"
+        command: restore
+        snapshot: ansible-db-snap
         instance_name: AnsibleImageDB
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
         subnet: "{{rds_sng}}"
         security_groups: "{{postgres_sg}}"
-        publicly_accessible: yes
+        publicly_accessible: no
         wait: yes
         wait_timeout: 600
         tags:
