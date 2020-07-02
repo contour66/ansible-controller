@@ -21,7 +21,7 @@
       rds:
         command: create
         db_name: image_gallery
-        instance_name: image_gallery
+        instance_name: imagegallery
         instance_type: db.t2.micro
         size: '10'
         db_engine: postgres
