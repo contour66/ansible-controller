@@ -9,21 +9,21 @@
     - name: Create netowrk load balancer
       elb_target_group:
         name: ans-nlb
+        state: present
         zones:
-          - "{{ aws_region + 'a' }}"
-          - "{{ aws_region + 'c'}}"
+          - us-west-1a
+          - us-east-1c
         subnet_mappings:
           - SubnetId: "{{public_subnet_1.id}}"
             AllocationId: "{{nlb_ip_1}}"
           - SubnetId: "{{public_subnet_1.id}}"
             AllocationId: "{{nlb_ip_2}}"
         listeners:
-          - Protocol: TLS
+          - protocol: TLS
             Certificates:
               - CertificatiteArn: "arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
             Port: 443
             DefaulatActions:
               - Type: Forward
                 TargetGroupName: ans-tg
-        state: present
-      register: ans_nlb
+        register: ans_nlb

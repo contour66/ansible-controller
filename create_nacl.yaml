@@ -51,3 +51,22 @@
           - [500, 'tcp', 'allow', '0.0.0.0/0', null, null, 80, 80]
       state: present
 
+
+  - name: Create ACl for secrets
+    ec2_vpc_nacl:
+      vpc_id: "{{ vpc.vpc.id }}"
+      name: ans-secrets-acl
+      region: "us-west-1"
+      tags:
+        Name: Ansible secrets ACL
+        Project: 5
+      ingress:
+        # rule no, protocol, allow/deny, cidr, icmp_type, icmp_code,
+        #                                             port from, port to
+        - [400, 'tcp', 'allow', '10.0.0.0/24', null, null, 443, 443]
+        - [500, 'tcp', 'allow', '10.0.0.0/24', null, null, 5432, 5432]
+      egress:
+        - [400, 'tcp', 'allow', '0.0.0.0/0', null, null, 443, 443]
+        - [500, 'tcp', 'allow', '0.0.0.0/0', null, null, 5432, 5432]
+      state: present
+

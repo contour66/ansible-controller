@@ -1,0 +1,82 @@
+- hosts: bastion
+  become: true
+  gather_facts: no
+  user: ec2-user
+  module_defaults:
+      group/aws:
+        region: "us-west-1"
+  vars:
+    ansible_python_interpreter:  /usr/bin/python3
+    host_name: "{{ lookup('file', 'rds.txt')}}"
+
+  tasks:
+    - name: debug
+      debug: var=ansible_python_interpreter
+
+    - name: debug
+      debug: var=host_name
+
+    - name: Connect to database
+      postgresql_db:
+        name: image_gallery
+        login_host: "{{host_name}}"
+        login_user: postgres
+        login_password: taco123
+        state: present
+      register: db_ig
+
+    - name: debug
+      debug: var=db_user
+
+    - name:
+      postgresql_table:
+        name: users
+        owner: image_gallery
+        columns:
+          - username varchar(100) primary key
+          - password varchar(100)
+          - full_name varchar(100)
+      register: users_table
+
+    - name: Insert query to image_gallery
+      postgresql_query:
+        db: image_gallery
+        query: insert into users (username, password, full_name) values(%s, %s, %s);
+
+
+    #    - name: Insert query to image_gallery
+    #      postgresql_query:
+    #        db: image_gallery
+    #        query: insert into users (username, password, full_name) values(%s, %s, %s);
+
+ #become: yes
+#      become_user: ec2-user
+#      postgresql_user:
+#        db: ansibleimagedb1
+##        login_host: "{{ans_rds.instance.endpoint}}"
+#        login_user: postgres
+#        login_password: postgres
+#        port: 5432
+#        no_password_changes: no
+#        priv: ALL
+#        user: image_gallery
+#        password: ceec4eif7ya
+#      register: db_user
+
+
+
+
+
+        #    - name: Connect to database, create  user, and grant access to database and products table
+        #      become: yes
+        #      become_user: postgres
+        #      postgresql_user:
+        #        name: "image_gallery"
+        #        password: "tacos"
+        #
+        #    - name: Access for user
+        #      become: yes
+        #      become_user: postgres
+        #      postgresql_privs:
+        #        db: ansibleimagedb
+        #        role: image_gallery
