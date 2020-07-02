@@ -40,7 +40,21 @@
 #      slurp:
 #        src: ./rds-ep.txt
 #      register: rds_name
+    - name: Add new instance to host group
+        add_host:
+          hostname: "{{item.public_ip }}"
+          groupname: tag_Name_m5_buffer
+        loop: "{{ db_sql.instances }}"
+          - name: Wait for SSH to come up
+            delegate_to: "{{ item.public_dns_name }}"
+            wait_for_connection:
+              delay: 30
+              timeout: 180
+            loop: "{{ db_sql.instances }}"
 
+    - hosts: tag_Name_m5_buffer
+      become: true
+      user: ec2-user
 
     - name: Connect to database,
       become: yes
@@ -48,14 +62,16 @@
       postgresql_user:
         db: "{{ans_rds.instance.db_name}}"
         login_host: "{{ans_rds.instance.endpoint}}"
-        login_user: "{{ lookup('aws_secret', 'sec-ans-ig') }}"
-        login_password: "{{ lookup('aws_secret', 'sec-ans-ig') }}"
+        login_user: postgres
+        login_password: postgres
         port: 5432
         no_password_changes: no
         priv: ALL
         user: image_gallery
         password: ceec4eif7ya
       register: db_user
+
+
 
     - name: debug
       debug: var=db_user
