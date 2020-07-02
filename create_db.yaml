@@ -30,7 +30,7 @@
         subnet: ans-rds-subnet
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
-        password: "{{ lookup('aws_secret', 'sec-ans-ig') }}"
+        password: postgres
 #        wait: yes
 #        wait_timeout: 600
         tags:
