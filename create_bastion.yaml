@@ -2,10 +2,10 @@
   become: true
   user: ec2-user
 
-#    - name: Insert query to image_gallery
-#      postgresql_query:
-#        db: image_gallery
-#        query: insert into users (username, password, full_name) values(%s, %s, %s);
+    #    - name: Insert query to image_gallery
+    #      postgresql_query:
+    #        db: image_gallery
+    #        query: insert into users (username, password, full_name) values(%s, %s, %s);
 
 
 
@@ -51,7 +51,7 @@
 
 
 
-            #    - name: Connect to database, create  user, and grant access to database and products table
+        #    - name: Connect to database, create  user, and grant access to database and products table
         #      become: yes
         #      become_user: postgres
         #      postgresql_user:
