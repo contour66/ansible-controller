@@ -43,9 +43,8 @@
 
     - name: Wait for SSH to come up
       delegate_to: "{{ item.public_dns_name }}"
-        port: 22
-        delay: 10
-        timeout: 120
+        delay: 30
+        timeout: 180
       loop: "{{ ec2.instances }}"
 #    - name: display multiple file contents
 #      slurp:
