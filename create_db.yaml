@@ -20,8 +20,8 @@
     - name: Create db
       rds:
         command: create
-        db_name: ansibleimagedb1
-        instance_name: ansibleimagedb1
+        db_name: image_gallery
+        instance_name: image_gallery
         instance_type: db.t2.micro
         size: '10'
         db_engine: postgres
