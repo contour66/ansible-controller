@@ -34,8 +34,8 @@
 
     - name: Connect to database,
       postgresql_user:
-        db: ansibleimagedb3
-        login_host: "{{ans_rds.endpoint}}"
+        db: "{{ans_rds}}"
+        login_host: ansibleimagedbnew.cfxeylolmgaa.us-west-1.rds.amazonaws.com
         login_user: postgres
         login_password: tacos123
         no_password_changes: no

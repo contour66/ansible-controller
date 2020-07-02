@@ -31,8 +31,7 @@
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
         password: postgres
-#        wait: yes
-#        wait_timeout: 600
+
         tags:
           name: ansible_db
       register: ans_rds
@@ -40,76 +39,4 @@
     - name: debug
       debug: var=ans_rds
 
-#    - name:
-#      rds_instance_info:
-#        db_instance_identifier: "{{ans_rds.db_name}}"
-#      register: db_info
-
-#    - name: Create user test and grant group user_ro and user_rw to it
-#      postgresql_user:
-#        name: test
-#        groups:
-#          - user_ro
-#          - user_rw
-  #
-    #    - name: Create new db from snapshot
-    #      rds:
-    #        command: modifygit stat
-    #        instance_name: image_gallery_ans
-    #        db_engine: postgres
-    #        size: 10
-    #        instance_type: db.t2.micro
-    #        username: postgres
-    #        password: postgres
-    #        tags:
-    #          Name: ansible-db
-    #      register: ans_db
-    #    - name: Get db name
-    #      rds_instance_info:
-    #        db_instance_identifier: image-gallery
-    #        register: image_gallery
-    #
-    #    - name: Create snapshot of db
-    #      rds_snapshot:
-    #        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
-    #        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
-    #      register: db_snap
-
-
 #
-#    - name: Create RDS instance with aws secret lookup for password param
-#      rds:
-#        command: create
-#        instance_name: AnsibleImageGallery
-#        db_engine: postgres
-#        size: 10
-#        instance_type: db.t2.micro
-#        username: postgres
-#        password: postgres
-#        tags:
-#          Name: AnsibleDb
-#      register: ans_db
-#
-#    - name: Get db name
-#      rds_instance_info:
-#        db_instance_identifier: image-gallery
-#     register: image_gallery
-#
-#    - name: Create snapshot of db
-#      rds_snapshot:
-#        db_instance_identifier: "{{image_gallery.db_instance_identifier}}"
-#        db_snapshot_identifier: "{{image_gallery.db_snapshot_identifier}}"
-#      register: db_snap
-##
-#    - name: Create new db from snapshot
-#      rds:
-#        command: modifygit stat
-#        instance_name: image_gallery_ans
-#        db_engine: postgres
-#        size: 10
-#        instance_type: db.t2.micro
-#        username: postgres
-#        password: postgres
-#        tags:
-#          Name: ansible-db
-#      register: ans_db
