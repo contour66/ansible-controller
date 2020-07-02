@@ -11,7 +11,9 @@
       ec2:
         key_name: zum
         assign_public_ip: yes
-        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
+        user_data:
+          - "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
+          - -"{{ lookup('file', './ec2-scripts/ec2_db_provision.sh') }}"
         group:
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
@@ -30,9 +32,6 @@
 
     - name: debug
       debug: var=db_sql
-
-
-
 #
 #    - name: display multiple file contents
 #      slurp:
