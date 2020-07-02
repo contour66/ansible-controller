@@ -47,6 +47,15 @@
         delay: 30
         timeout: 180
       loop: "{{ ec2.instances }}"
+
+    - name: install prerequisites
+      sudo: true
+      apt: name={{ item }} state=latest
+      with_items:
+        - libpq-dev
+        - python-psycopg2
+      tags:
+        - packages
 #    - name: display multiple file contents
 #      slurp:
 #        src: ./rds-ep.txt
