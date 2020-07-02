@@ -31,21 +31,8 @@
     - name: debug
       debug: var=db_sql
 
-#    - name: Connect to database, create  user, and grant access to database and products table
-#      become: yes
-#      become_user: postgres
-#      postgresql_user:
-#        name: "image_gallery"
-#        password: "tacos"
-#
-#    - name: Access for user
-#      become: yes
-#      become_user: postgres
-#      postgresql_privs:
-#        db: ansibleimagedb
-#        role: image_gallery
-#        privs: ALL
-     - name: Connect to database,
+
+    - name: Connect to database,
         db: ansibleimagedb3
         login_host: "{{ans_rds.endpoint}}"
         login_user: postgres
@@ -56,8 +43,8 @@
         password: ceec4eif7ya
       register: db_user
 
-      - name: debug
-        debug: var=db_user
+        - name: debug
+          debug: var=db_user
 
     - name:
       postgresql_table:
@@ -73,3 +60,21 @@
       postgresql_query:
         db: image_gallery
         query: insert into users (username, password, full_name) values(%s, %s, %s);
+
+
+
+
+        #    - name: Connect to database, create  user, and grant access to database and products table
+        #      become: yes
+        #      become_user: postgres
+        #      postgresql_user:
+        #        name: "image_gallery"
+        #        password: "tacos"
+        #
+        #    - name: Access for user
+        #      become: yes
+        #      become_user: postgres
+        #      postgresql_privs:
+        #        db: ansibleimagedb
+        #        role: image_gallery
+        #        privs: ALL
