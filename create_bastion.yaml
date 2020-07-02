@@ -1,5 +1,6 @@
 - hosts: launched
   become: true
+  gather_facts: yes
   user: ec2-user
 
     #    - name: Insert query to image_gallery

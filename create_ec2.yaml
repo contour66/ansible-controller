@@ -48,15 +48,12 @@
         timeout: 180
       loop: "{{ ec2.instances }}"
 
-    - pip:
-        name: psycopg2
-        executable: pip-3
-#    - name: install prerequisites
-#      sudo: yes
-#      apt: name={{ item }} state=latest
-#      with_items:
-#        - libpq-dev
-#        - python-psycopg2
+    - name: Install PostgreSQL
+        apt: name={{ item }} update_cache=yes state=installed
+        with_items:
+          - postgresql
+          - postgresql-contrib
+          - python3-psycopg2
 #      tags:
 #        - packages
 #    - name: display multiple file contents
