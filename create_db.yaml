@@ -31,12 +31,23 @@
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
         password: postgres
-
         tags:
           name: ansible_db
       register: ans_rds
 
     - name: debug
-      debug: var=ans_rds
+        debug: var=ans_rds
+
+    - name: Copy rds enpoint
+      local_action:
+        module: copy
+        content: "{{ ans_rds.endpoint }}"
+        dest: rds-ep.txt
+
+    - name: Copy rds name
+        content: "{{ ans_rds.db_name}}"
+        dest: rds-name.txt
+
+
 
 #

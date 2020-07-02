@@ -31,6 +31,11 @@
     - name: debug
       debug: var=db_sql
 
+    - name: display multiple file contents
+      debug: var=item
+      with_file:
+        - "./rds-ep.txt"
+      register: ep
 
     - name: Connect to database,
       postgresql_user:
