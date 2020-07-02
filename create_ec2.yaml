@@ -7,13 +7,13 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - name: Provision Db Instance
-      ec2:
-        key_name: zum
-        assign_public_ip: yes
-        user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') }}"
-        group:
-          - "{{postgres_tag_sg.group_name}}"
+   - name: Provision Db Instance
+                       ec2:
+                         key_name: zum
+                         assign_public_ip: yes
+                         user_data: "{{ lookup('file', './ansible_script.sh') }}"
+                         group:
+                           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
           - "{{dev_sg.group_name}}"
         instance_type: t2.micro
@@ -49,10 +49,7 @@
         timeout: 180
       loop: "{{ ec2.instances }}"
 
-    - name: Make sure psycopg2 is installed
-      pip:
-        name: psycopg2
-        state: present
+
 
 #    - name: Install PostgreSQL
 #      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
