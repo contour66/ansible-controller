@@ -21,7 +21,7 @@
       rds:
         command: create
         db_name: ansibleimage_db
-        instance_name: ansibleimagedb2
+        instance_name: ansibleimagedb3
         instance_type: db.t2.micro
         size: '10'
         db_engine: postgres
