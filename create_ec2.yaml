@@ -33,6 +33,7 @@
 
 
     - name: Connect to database,
+      postgresql_user:
         db: ansibleimagedb3
         login_host: "{{ans_rds.endpoint}}"
         login_user: postgres
