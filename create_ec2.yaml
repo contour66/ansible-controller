@@ -16,19 +16,19 @@
           - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
           - "{{dev_sg.group_name}}"
-          instance_type: t2.micro
-          wait: yes
-          wait_timeout: 500
-          region: "{{ aws_region }}"
-          image: "{{ ami_id }}"
-          instance_profile_name: image-gallery-server-role
-          instance_tags:
-            Name: provision_postgres_instance
-          vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
-          exact_count: 1
-          count_tag:
-            Name: ans_Db_sql
-        register: ec2
+        instance_type: t2.micro
+        wait: yes
+        wait_timeout: 500
+        region: "{{ aws_region }}"
+        image: "{{ ami_id }}"
+        instance_profile_name: image-gallery-server-role
+        instance_tags:
+          Name: provision_postgres_instance
+        vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
+        exact_count: 1
+        count_tag:
+          Name: ans_Db_sql
+      register: ec2
 
     - local_action: copy content="{{ ans_rds }}" dest=rds.txt
     #    - name: debug
