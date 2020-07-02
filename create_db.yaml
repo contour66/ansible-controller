@@ -41,7 +41,7 @@
     - name: Copy rds enpoint
       local_action:
         module: copy
-        content: "{{ ans_rds.endpoint }}"
+        content: "{{ ans_rds.engine }}"
         dest: rds-ep.txt
 
     - name: Copy rds name
