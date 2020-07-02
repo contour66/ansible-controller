@@ -14,7 +14,7 @@ sudo yum install -y gcc
 sudo yum install -y python3-devel
 sudo yum install -y postgresql-devel
 sudo yum install -y jq # json parser
-sudo pip3 install pyhton-psycopg2
+sudo pip3 install python-psycopg2
 sudo pip3 install boto3
 cd /home/ec2-user
 pip3 install --user boto3
