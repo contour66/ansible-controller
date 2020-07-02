@@ -43,7 +43,7 @@
 
     - name: Create postgres user for my app
       become: yes
-      become_user: postgres
+      become_user: ec2-user
       postgresql_user:
         name: "myappuser"
         password: "supersecretpassword"
