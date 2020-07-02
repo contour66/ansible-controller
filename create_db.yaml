@@ -36,6 +36,7 @@
       register: ans_rds
 
     - name: debug
+
       debug: var=ans_rds
 #
 #    - name: Add sql params

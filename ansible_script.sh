@@ -3,6 +3,7 @@
 yum update -y
 yum install -y gcc
 yum install -y python3
+sudo pip3 install libpq-dev python3-dev
 yum install -y python3-devel
 yum install -y postgresql-devel
 pip3 install boto3 #--user
