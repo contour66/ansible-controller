@@ -42,12 +42,7 @@
       blockinfile:
         path: /ec2-scripts/ec2_db_provisions.sh
         block: |
-          #!/usr/bin/bash
-          psql -h "{{ans_rds.instance.endpoint}}" - U postgres -d postgres
-          create user image_gallery login password{ lookup('aws_secret', 'ans-sec-ig') }};
-          grant image_gallery to postgres;
-          create database image_gallery owner image_gallery;
-          create table users (username varchar(100) not null primary key, password varchar(100), full_name varchar(200));
+         x
         state: present
 
     - name: Changing perm of "/ec2_b_provisions.sh", adding "+x"
