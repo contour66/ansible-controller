@@ -38,17 +38,17 @@
     - name: debug
       debug: var=ans_rds
 #
-#    - name: Copy rds enpoint
-#      local_action:
-#        module: copy
-#        content: "{{ ans_rds.instance.engine }}"
-#        dest: rds-ep.txt
-#
-#    - name: Copy rds name
-#      local_action:
-#        module: copy
-#        content: "{{ ans_rds.db_name }}"
-#        dest: rds-name.txt
+    - name: Copy rds enpoint
+      local_action:
+        module: copy
+        content: "{{ ans_rds.instance.engine }}"
+        dest: rds-ep.txt
+
+    - name: Copy rds name
+      local_action:
+        module: copy
+        content: "{{ ans_rds.db_name }}"
+        dest: rds-name.txt
 
 
 
