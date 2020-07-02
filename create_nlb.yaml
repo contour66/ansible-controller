@@ -14,9 +14,9 @@
           - us-west-1a
           - us-east-1c
         subnet_mappings:
-          - SubnetId: "{{public_subnet_1.id}}"
+          - SubnetId: "{{public_subnet_1.subnet.id}}"
             AllocationId: "{{nlb_ip_1}}"
-          - SubnetId: "{{public_subnet_1.id}}"
+          - SubnetId: "{{public_subnet_1.subnet.id}}"
             AllocationId: "{{nlb_ip_2}}"
         listeners:
           - protocol: TLS
