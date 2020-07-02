@@ -30,14 +30,15 @@
           Name: ans_Db_sql
       register: ec2
 
+    - local_action: copy content ={{ ans_rds.instance.endpoint }}" dest rds.txt
 #    - name: debug
 #      debug: var=db_sql
 #
     - name: Add host to group
       add_host:
-        hostname: "{{ item.public_ip }}"
-        groupname: launched
-      loop: "{{ ec2.instances }}"
+        name: "{{ ec2.tagged_instances[0].public_dns_name }}"
+        groups: bastion
+#      loop: "{{ ec2.instances }}"
       register: db_host
 
 

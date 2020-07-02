@@ -1,7 +1,14 @@
-- hosts: launched
+- hosts: bastion
   become: true
   gather_facts: yes
   user: ec2-user
+  module_defaults:
+      group/aws:
+        region: "us-west-1"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    host_name: "{{ lookup('file', 'rds.txt')}}"
+
 
     #    - name: Insert query to image_gallery
     #      postgresql_query:
@@ -10,20 +17,29 @@
 
 
   tasks:
+    - name: debug
+      debug: var=host_name
     - name: Connect to database
+      postgresql_db:
+        name: image_gallery
+        login_host: "{host_name}}"
+        login_user: postgres
+        login_password: tacos123
+        state: present
+      register: db_ig
 #      become: yes
 #      become_user: ec2-user
-      postgresql_user:
-        db: ansibleimagedb1
-#        login_host: "{{ans_rds.instance.endpoint}}"
-        login_user: postgres
-        login_password: postgres
-        port: 5432
-        no_password_changes: no
-        priv: ALL
-        user: image_gallery
-        password: ceec4eif7ya
-      register: db_user
+#      postgresql_user:
+#        db: ansibleimagedb1
+##        login_host: "{{ans_rds.instance.endpoint}}"
+#        login_user: postgres
+#        login_password: postgres
+#        port: 5432
+#        no_password_changes: no
+#        priv: ALL
+#        user: image_gallery
+#        password: ceec4eif7ya
+#      register: db_user
 
 
 
