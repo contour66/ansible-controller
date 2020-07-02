@@ -41,13 +41,13 @@
     - name: Copy rds enpoint
       local_action:
         module: copy
-        content: "{{ ans_rds.instance.engine }}"
+        content: "{{ ans_rds.instance.endpoint }}"
         dest: rds-ep.txt
 
     - name: Copy rds name
       local_action:
         module: copy
-        content: "{{ ans_rds.db_name }}"
+        content: "{{ ans_rds.instance.db_name }}"
         dest: rds-name.txt
 
 
