@@ -1,6 +1,6 @@
 - hosts: bastion
   become: true
-  gather_facts: yes
+  gather_facts: no
   user: ec2-user
   module_defaults:
       group/aws:
@@ -22,7 +22,7 @@
     - name: Connect to database
       postgresql_db:
         name: image_gallery
-        login_host: "{host_name}}"
+        login_host: "{{host_name}}"
         login_user: postgres
         login_password: tacos123
         state: present
