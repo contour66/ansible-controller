@@ -49,11 +49,8 @@
       loop: "{{ ec2.instances }}"
 
     - name: Install PostgreSQL
-      apt: name={{ item }} update_cache=yes state=installed
-      with_items:
-        - postgresql
-        - postgresql-contrib
-        - python3-psycopg2
+      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
+      state: present
 #      tags:
 #        - packages
 #    - name: display multiple file contents
