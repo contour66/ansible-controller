@@ -39,10 +39,10 @@
     - name: debug
       debug: var=ans_rds
 
-    - name:
-      rds_instance_info:
-        db_instance_identifier: "{{ans_rds.db_name}}"
-      register: db_info
+#    - name:
+#      rds_instance_info:
+#        db_instance_identifier: "{{ans_rds.db_name}}"
+#      register: db_info
 
 #    - name: Create user test and grant group user_ro and user_rw to it
 #      postgresql_user:
