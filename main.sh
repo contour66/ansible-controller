@@ -23,7 +23,6 @@ systemctl disable postfix
 # Configure/install custom software
 cd /home/ec2-user
 git clone https://github.com/contour66/python-image-gallery.git
-git clone https://github.com/contour66/ansible-controller.git
 chown -R ec2-user:ec2-user python-image-gallery
 chown -R ec2-user:ec2-user ansible-controller
 su ec2-user -c "cd ~/ansible-controller && pip3 install -r requirements.txt --user"
