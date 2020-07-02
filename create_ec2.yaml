@@ -49,7 +49,7 @@
       loop: "{{ ec2.instances }}"
 
     - name: install prerequisites
-      sudo: true
+      sudo: yes
       apt: name={{ item }} state=latest
       with_items:
         - libpq-dev
