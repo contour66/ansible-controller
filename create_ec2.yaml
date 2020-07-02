@@ -32,15 +32,20 @@
       debug: var=db_sql
 
     - name: display multiple file contents
-      debug: var=item
-      with_file:
-        - "./rds-ep.txt"
+      slurp:
+        src: ./rds-ep.txt
       register: ep
+
+    - name: display multiple file contents
+      slurp:
+        src: ./rds-ep.txt
+      register: rds_name
+
 
     - name: Connect to database,
       postgresql_user:
-        db: "{{ans_rds}}"
-        login_host: ansibleimagedbnew.cfxeylolmgaa.us-west-1.rds.amazonaws.com
+        db: "{{rds_name}}"
+        login_host: "{{ep}}"
         login_user: postgres
         login_password: tacos123
         no_password_changes: no
