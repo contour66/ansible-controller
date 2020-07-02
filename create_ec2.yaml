@@ -7,38 +7,38 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-   - name: Provision Db Instance
-     ec2:
-       key_name: zum
-       assign_public_ip: yes
-       user_data: "{{ lookup('file', './ansible_script.sh') }}"
-       group:
-         - "{{postgres_tag_sg.group_name}}"
+    - name: Provision Db Instance
+      ec2:
+        key_name: zum
+        assign_public_ip: yes
+        user_data: "{{ lookup('file', './ansible_script.sh') }}"
+        group:
+          - "{{postgres_tag_sg.group_name}}"
           - "{{nginx_sg.group_name}}"
           - "{{dev_sg.group_name}}"
-        instance_type: t2.micro
-        wait: yes
-        wait_timeout: 500
-        region: "{{ aws_region }}"
-        image: "{{ ami_id }}"
-        instance_profile_name: image-gallery-server-role
-        instance_tags:
-          Name: provision_postgres_instance
-        vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
-        exact_count: 1
-        count_tag:
-          Name: ans_Db_sql
-      register: ec2
+          instance_type: t2.micro
+          wait: yes
+          wait_timeout: 500
+          region: "{{ aws_region }}"
+          image: "{{ ami_id }}"
+          instance_profile_name: image-gallery-server-role
+          instance_tags:
+            Name: provision_postgres_instance
+          vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
+          exact_count: 1
+          count_tag:
+            Name: ans_Db_sql
+        register: ec2
 
     - local_action: copy content="{{ ans_rds }}" dest=rds.txt
-#    - name: debug
-#      debug: var=db_sql
-#
+    #    - name: debug
+    #      debug: var=db_sql
+    #
     - name: Add host to group
       add_host:
         name: "{{ ec2.tagged_instances[0].public_dns_name }}"
         groups: bastion
-#      loop: "{{ ec2.instances }}"
+      #      loop: "{{ ec2.instances }}"
       register: db_host
 
 
@@ -51,72 +51,72 @@
 
 
 
-#    - name: Install PostgreSQL
-#      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
-#      state: present
-#      tags:
-#        - packages
-#    - name: display multiple file contents
-#      slurp:
-#        src: ./rds-ep.txt
-#      register: ep
-#
-#    - name: display multiple file contents
-#      slurp:
-#        src: ./rds-ep.txt
-#      register: rds_name
-#    - name: Add new instance to host group
-#      add_host:
-#        hostname: "{{item.public_ip }}"
-#        groupname: tag_Name_m5_buffer
-#      loop: "{{ db_sql.instances }}"
+        #    - name: Install PostgreSQL
+        #      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
+        #      state: present
+        #      tags:
+        #        - packages
+        #    - name: display multiple file contents
+        #      slurp:
+        #        src: ./rds-ep.txt
+        #      register: ep
+        #
+        #    - name: display multiple file contents
+        #      slurp:
+        #        src: ./rds-ep.txt
+        #      register: rds_name
+        #    - name: Add new instance to host group
+        #      add_host:
+        #        hostname: "{{item.public_ip }}"
+        #        groupname: tag_Name_m5_buffer
+        #      loop: "{{ db_sql.instances }}"
 
-#    - name: Wait for SSH to come up
-#      delegate_to: "{{ item.public_dns_name }}"
-#      wait_for_connection:
-#        delay: 30
-#        timeout: 180
-#      loop: "{{ db_sql.instances }}"
-#
-#    - hosts: tag_Name_m5_buffer
-#      become: true
-#      user: ec2-user
-#
-#    - name: Connect to database,
-#      become: yes
-#      become_user: ec2-user
-#      postgresql_user:
-#        db: "{{ans_rds.instance.db_name}}"
-#        login_host: "{{ans_rds.instance.endpoint}}"
-#        login_user: postgres
-#        login_password: postgres
-#        port: 5432
-#        no_password_changes: no
-#        priv: ALL
-#        user: image_gallery
-#        password: ceec4eif7ya
-#      register: db_user
-#
-#
-#
-#    - name: debug
-#      debug: var=db_user
-#
-#    - name:
-#      postgresql_table:
-#        name: users
-#        owner: image_gallery
-#        columns:
-#          - username varchar(100) primary key
-#          - password varchar(100)
-#          - full_name varchar(100)
-#      register: users_table
-#
-#    - name: Insert query to image_gallery
-#      postgresql_query:
-#        db: image_gallery
-#        query: insert into users (username, password, full_name) values(%s, %s, %s);
-#
+        #    - name: Wait for SSH to come up
+        #      delegate_to: "{{ item.public_dns_name }}"
+        #      wait_for_connection:
+        #        delay: 30
+        #        timeout: 180
+        #      loop: "{{ db_sql.instances }}"
+        #
+        #    - hosts: tag_Name_m5_buffer
+        #      become: true
+        #      user: ec2-user
+        #
+        #    - name: Connect to database,
+        #      become: yes
+        #      become_user: ec2-user
+        #      postgresql_user:
+        #        db: "{{ans_rds.instance.db_name}}"
+        #        login_host: "{{ans_rds.instance.endpoint}}"
+        #        login_user: postgres
+        #        login_password: postgres
+        #        port: 5432
+        #        no_password_changes: no
+        #        priv: ALL
+        #        user: image_gallery
+        #        password: ceec4eif7ya
+        #      register: db_user
+        #
+        #
+        #
+        #    - name: debug
+        #      debug: var=db_user
+        #
+        #    - name:
+        #      postgresql_table:
+        #        name: users
+        #        owner: image_gallery
+        #        columns:
+        #          - username varchar(100) primary key
+        #          - password varchar(100)
+        #          - full_name varchar(100)
+        #      register: users_table
+        #
+        #    - name: Insert query to image_gallery
+        #      postgresql_query:
+        #        db: image_gallery
+        #        query: insert into users (username, password, full_name) values(%s, %s, %s);
+        #
 
 
 
@@ -133,4 +133,4 @@
         #      postgresql_privs:
         #        db: ansibleimagedb
         #        role: image_gallery
-        #        privs: ALL
+      #        privs: ALL
