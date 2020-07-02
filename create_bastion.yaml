@@ -8,7 +8,7 @@
     #        query: insert into users (username, password, full_name) values(%s, %s, %s);
 
 
-
+tasks:
     - name: Connect to database
       become: yes
       become_user: ec2-user
