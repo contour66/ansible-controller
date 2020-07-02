@@ -44,7 +44,7 @@
 
     - name: Connect to database,
       become: yes
-      become_user: root
+      become_user: ec2-user
       postgresql_user:
         db: "{{ans_rds.instance.db_name}}"
         login_host: "{{ans_rds.instance.endpoint}}"
