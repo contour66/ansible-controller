@@ -11,7 +11,7 @@
 
   tasks:
     - name: debug
-      debug: vars=ansible_python_interpreter
+      debug: var=ansible_python_interpreter
 
     - name: debug
       debug: var=host_name
