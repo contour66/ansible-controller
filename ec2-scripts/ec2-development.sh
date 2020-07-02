@@ -7,6 +7,7 @@ amazon-linux-extras install -y nginx1
 amazon-linux-extras install -y java-openjdk11
 yum install -y java-11-openjdk-devel
 yum install -y git python3  postgresql postgresql-devel gcc python3-devel
+pip3 install psycopg2 boto botocore boto3
 yum install -y emacs-nox nano tree
 
 
