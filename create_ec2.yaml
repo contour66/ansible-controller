@@ -36,7 +36,7 @@
     - name: Add host to group 'just_created' with variable foo=42
       add_host:
         hostname: "{{ item.public_ip }}"
-          groupname: launched
+        groupname: launched
       loop: "{{ ec2.instances }}"
       register: db_host
 
