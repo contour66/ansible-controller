@@ -30,7 +30,7 @@
           Name: ans_Db_sql
       register: ec2
 
-    - local_action: copy content ={{ ans_rds.instance.endpoint }}" dest rds.txt
+    - local_action: copy content ="{{ ans_rds.instance.endpoint }}" dest rds.txt
 #    - name: debug
 #      debug: var=db_sql
 #
