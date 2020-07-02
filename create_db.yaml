@@ -50,6 +50,9 @@
           create table users (username varchar(100) not null primary key, password varchar(100), full_name varchar(200));
         state: present
 
+    - name: Changing perm of "/ec2_b_provisions.sh", adding "+x"
+        file: dest=/ec2-scripts/ec2_db_provisions.sh mode=x
+
     - name: Copy rds enpoint
       local_action:
         module: copy
