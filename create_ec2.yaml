@@ -33,7 +33,7 @@
 #
     - name: Add host to group 'just_created' with variable foo=42
       add_host:
-        name: "{{db_sql.public_ip}}"
+        name: "{{db_sql.instance.public_ip}}"
         groupname: tag_Name_m5_buffer
       register: db_host
 #    - name: display multiple file contents
