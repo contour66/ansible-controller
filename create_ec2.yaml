@@ -33,7 +33,7 @@
 
     - name: Connect to database, create  user, and grant access to database and products table
       postgresql_user:
-        db: "{{ans_rds.db_name}}"
+        db: "{{ans_rds.instance_name}}"
         login_host: "{{ans_rds.ans_rds.endpoint}}"
         login_user: postgres
         login_password: tacos123
