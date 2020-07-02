@@ -21,7 +21,7 @@
         wait_timeout: 500
         region: "{{ aws_region }}"
         image: "{{ ami_id }}"
-        instance_profile_name: image-gallery-server-role
+        instance_profile_name: arn:aws:iam::384025033813:instance-profile/image-gallery-server-role
         instance_tags:
           Name: provision_postgres_instance
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
