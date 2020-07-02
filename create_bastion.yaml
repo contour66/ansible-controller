@@ -2,6 +2,7 @@
   become: true
   user: ec2-user
 
+tasks:
     - name: Connect to database,
       become: yes
       become_user: ec2-user
