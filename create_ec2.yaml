@@ -30,22 +30,22 @@
 
     - name: debug
       debug: var=db_sql
-
-    - name: display multiple file contents
-      slurp:
-        src: ./rds-ep.txt
-      register: ep
-
-    - name: display multiple file contents
-      slurp:
-        src: ./rds-ep.txt
-      register: rds_name
+#
+#    - name: display multiple file contents
+#      slurp:
+#        src: ./rds-ep.txt
+#      register: ep
+#
+#    - name: display multiple file contents
+#      slurp:
+#        src: ./rds-ep.txt
+#      register: rds_name
 
 
     - name: Connect to database,
       postgresql_user:
-        db: "{{rds_name}}"
-        login_host: "{{ep}}"
+        db: "{{ans_rds.instance.db_name}}"
+        login_host: "{{ans_rds.instance.endpoint}}"
         login_user: postgres
         login_password: tacos123
         no_password_changes: no
