@@ -1,14 +1,66 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
+  tasks:
+    - name: Create rds subnet
+      rds_subnet_group:
+        state: present
+        name: ans-rds-subnet
+        description: private subnet for ansible rds
+        subnets:
+          - "{{private_subnet_1.subnet.id}}"
+          - "{{private_subnet_2.subnet.id}}"
+      register: rds_sng
+
+
+    - name: Create db
+      rds:
+        command: create
+        db_name: image_gallery
+        instance_name: imagegallery
+        instance_type: db.t2.micro
+        size: '10'
+        db_engine: postgres
+        region: "{{ aws_region }}"
+        zone: "{{ aws_region + 'a' }}"
+        subnet: ans-rds-subnet
+        vpc_security_groups:  "{{postgres_sg.group_id}}"
+        username: postgres
+        password: postgres
+        tags:
+          name: ansible_db
+      register: ans_rds
+
+    - name: debug
+
+      debug: var=ans_rds
+#
+#    - name: Add sql params
+#      blockinfile:
+#        path: /ec2-scripts/ec2_db_provisions.sh
+#        block: |
+#         x
+#        state: present
+#
+#    - name: Changing perm of "/ec2_b_provisions.sh", adding "+x"
+#        file: dest=/ec2-scripts/ec2_db_provisions.sh mode=x
+#
+#    - name: Copy rds enpoint
+#      local_action:
+#        module: copy
+#        content: "{{ ans_rds.instance.endpoint }}"
+#        dest: rds-ep.txt
+#
+#    - name: Copy rds name
+#      local_action:
+#        module: copy
+#        content: "{{ ans_rds.instance.db_name }}"
+#        dest: rds-name.txt
 
 
 
-
-- name: Create a DB instance using the default AWS KMS encryption key
-  rds_instance:
-    id: ans-db
-    state: present
-    engine: postgres
-    storage_encrypted: True
-    db_instance_class: db.t2.micrp
-    username: "{{ username }}"
-    password: "{{ password }}"
-    allocated_storage: "{{ allocated_storage }}"
+#
