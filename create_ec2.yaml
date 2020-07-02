@@ -41,12 +41,6 @@
 #        src: ./rds-ep.txt
 #      register: rds_name
 
-    - name: Create postgres user for my app
-      become: yes
-      become_user: ec2-user
-      postgresql_user:
-        name: "myappuser"
-        password: "supersecretpassword"
 
     - name: Connect to database,
       become: yes
