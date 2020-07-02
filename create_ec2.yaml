@@ -40,11 +40,11 @@
 #      slurp:
 #        src: ./rds-ep.txt
 #      register: rds_name
-    - name: Add new instance to host group
-      add_host:
-        hostname: "{{item.public_ip }}"
-        groupname: tag_Name_m5_buffer
-      loop: "{{ db_sql.instances }}"
+#    - name: Add new instance to host group
+#      add_host:
+#        hostname: "{{item.public_ip }}"
+#        groupname: tag_Name_m5_buffer
+#      loop: "{{ db_sql.instances }}"
 
 #    - name: Wait for SSH to come up
 #      delegate_to: "{{ item.public_dns_name }}"
