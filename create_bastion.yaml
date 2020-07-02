@@ -1,4 +1,4 @@
-- hosts: tag_Name_m5_buffer
+- hosts: launched
   become: true
   user: ec2-user
 
