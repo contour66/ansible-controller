@@ -49,6 +49,11 @@
         timeout: 180
       loop: "{{ ec2.instances }}"
 
+    - name: Make sure psycopg2 is installed
+      pip:
+        name: psycopg2
+        state: present
+
 #    - name: Install PostgreSQL
 #      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
 #      state: present
