@@ -17,6 +17,8 @@
           - "{{nginx_sg.group_name}}"
           - "{{dev_sg.group_name}}"
         instance_type: t2.micro
+        wait: yes
+        wait_timeout: 500
         region: "{{ aws_region }}"
         image: "{{ ami_id }}"
         instance_profile_name: image-gallery-server-role
@@ -26,16 +28,25 @@
         exact_count: 1
         count_tag:
           Name: ans_Db_sql
-      register: db_sql
+      register: ec2
 
-    - name: debug
-      debug: var=db_sql
+#    - name: debug
+#      debug: var=db_sql
 #
     - name: Add host to group 'just_created' with variable foo=42
       add_host:
-        name: "{{db_sql.instance.public_ip}}"
-        groupname: tag_Name_m5_buffer
+        hostname: "{{ item.public_ip }}"
+          groupname: launched
+      loop: "{{ ec2.instances }}"
       register: db_host
+
+
+    - name: Wait for SSH to come up
+      delegate_to: "{{ item.public_dns_name }}"
+        port: 22
+        delay: 10
+        timeout: 120
+      loop: "{{ ec2.instances }}"
 #    - name: display multiple file contents
 #      slurp:
 #        src: ./rds-ep.txt

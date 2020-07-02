@@ -1,6 +1,6 @@
-Host: "{{db_host}}"
+- hosts: tag_Name_m5_buffer
+  become: true
   user: ec2-user
-  proxycommand: ssh -q -A ec2-user@"{{db_host}}"
 
 #    - name: Insert query to image_gallery
 #      postgresql_query:
