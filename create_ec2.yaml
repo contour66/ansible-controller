@@ -1,4 +1,5 @@
-- hosts: localhost
+- hosts:
+    all
   gather_facts: no
   vars:
     aws_region: "us-west-1"
