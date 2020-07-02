@@ -20,15 +20,15 @@
     - name: Create db
       rds:
         command: create
-        db_name: ansibleimagedb
-        instance_name: ansibleimagedbnew
+        db_name: ansibleimagedb1
+        instance_name: ansibleimagedb1
         instance_type: db.t2.micro
         size: '10'
         db_engine: postgres
         region: "{{ aws_region }}"
         zone: "{{ aws_region + 'a' }}"
         subnet: ans-rds-subnet
-        vpc_security_groups:  "{{postgres_sg.group_id}}"
+#        vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
         password: postgres
         tags:
