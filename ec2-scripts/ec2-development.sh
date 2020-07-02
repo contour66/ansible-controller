@@ -14,12 +14,14 @@ sudo yum install -y gcc
 sudo yum install -y python3-devel
 sudo yum install -y postgresql-devel
 sudo yum install -y jq # json parser
-sudo pip3 install python3-psycopg2
+
 sudo pip3 install ansible
 sudo pip3 install boto3
 cd /home/ec2-user
 pip3 install --user boto3
-
+# shellcheck disable=SC2164
+cd /home/ec2-user/bin
+sudo pip3 install psycopg2
 
 # Configure/install custom software
 cd /home/ec2-user
