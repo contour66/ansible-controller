@@ -44,8 +44,8 @@
         password: ceec4eif7ya
       register: db_user
 
-        - name: debug
-          debug: var=db_user
+    - name: debug
+      debug: var=db_user
 
     - name:
       postgresql_table:
