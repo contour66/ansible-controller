@@ -20,7 +20,7 @@ sudo pip3 install boto3
 cd /home/ec2-user
 pip3 install --user boto3
 # shellcheck disable=SC2164
-
+cd /usr/bin/python3
 sudo pip3 install  --user psycopg2
 
 # Configure/install custom software
