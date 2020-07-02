@@ -9,6 +9,15 @@ yum install -y java-11-openjdk-devel
 yum install -y git python3  postgresql postgresql-devel gcc python3-devel
 pip3 install psycopg2 boto botocore boto3
 yum install -y emacs-nox nano tree
+sudo yum install -y postgresql
+sudo yum install -y gcc
+sudo yum install -y python3-devel
+sudo yum install -y postgresql-devel
+sudo yum install -y jq # json parser
+sudo pip3 install psycopg2
+sudo pip3 install boto3
+cd /home/ec2-user
+pip3 install --user boto3
 
 
 # Configure/install custom software
