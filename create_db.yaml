@@ -38,27 +38,27 @@
     - name: debug
       debug: var=ans_rds
 #
-    - name: Add sql params
-      blockinfile:
-        path: /ec2-scripts/ec2_db_provisions.sh
-        block: |
-         x
-        state: present
-
-    - name: Changing perm of "/ec2_b_provisions.sh", adding "+x"
-        file: dest=/ec2-scripts/ec2_db_provisions.sh mode=x
-
-    - name: Copy rds enpoint
-      local_action:
-        module: copy
-        content: "{{ ans_rds.instance.endpoint }}"
-        dest: rds-ep.txt
-
-    - name: Copy rds name
-      local_action:
-        module: copy
-        content: "{{ ans_rds.instance.db_name }}"
-        dest: rds-name.txt
+#    - name: Add sql params
+#      blockinfile:
+#        path: /ec2-scripts/ec2_db_provisions.sh
+#        block: |
+#         x
+#        state: present
+#
+#    - name: Changing perm of "/ec2_b_provisions.sh", adding "+x"
+#        file: dest=/ec2-scripts/ec2_db_provisions.sh mode=x
+#
+#    - name: Copy rds enpoint
+#      local_action:
+#        module: copy
+#        content: "{{ ans_rds.instance.endpoint }}"
+#        dest: rds-ep.txt
+#
+#    - name: Copy rds name
+#      local_action:
+#        module: copy
+#        content: "{{ ans_rds.instance.db_name }}"
+#        dest: rds-name.txt
 
 
 
