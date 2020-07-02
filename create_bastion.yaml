@@ -9,7 +9,7 @@
 
 
 
-    - name: Connect to database,
+    - name: Connect to database
       become: yes
       become_user: ec2-user
       postgresql_user:
