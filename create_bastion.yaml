@@ -6,7 +6,7 @@
       group/aws:
         region: "us-west-1"
   vars:
-    ansible_python_interpreter:  "/usr/bin/env python"
+#    ansible_python_interpreter:  /usr/bin/python3
     host_name: "{{ lookup('file', 'rds.txt')}}"
 
   tasks:
