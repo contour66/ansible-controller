@@ -45,12 +45,13 @@
     - name: Connect to database,
       postgresql_user:
         db: "{{ans_rds.instance.db_name}}"
-        login_host: "{{ans_rds.instance.endpoint}}"
-        login_user: postgres
-        login_password: postgres
-        no_password_changes: no
+#        login_host: "{{ans_rds.instance.endpoint}}"
+#        login_user: postgres
+#        login_password: postgres
+#        no_password_changes: no
+
+        name: image_gallery
         priv: ALL
-        user: image_gallery
         password: ceec4eif7ya
       register: db_user
 
