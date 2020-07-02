@@ -48,6 +48,9 @@
         timeout: 180
       loop: "{{ ec2.instances }}"
 
+    - pip:
+        name: psycopg2
+        executable: pip-3
 #    - name: install prerequisites
 #      sudo: yes
 #      apt: name={{ item }} state=latest
