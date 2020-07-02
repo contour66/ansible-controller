@@ -32,7 +32,7 @@
       debug: var=db_sql
 
 
-    - name
+
 #
 #    - name: display multiple file contents
 #      slurp:
