@@ -44,6 +44,8 @@
 
     - name: Connect to database,
       postgresql_user:
+        become: yes
+        become_user: postgres
         db: "{{ans_rds.instance.db_name}}"
         login_host: "{{ans_rds.instance.endpoint}}"
         login_user: postgres
