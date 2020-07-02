@@ -11,8 +11,8 @@
 
   tasks:
     - name: Connect to database
-      become: yes
-      become_user: ec2-user
+#      become: yes
+#      become_user: ec2-user
       postgresql_user:
         db: ansibleimagedb1
 #        login_host: "{{ans_rds.instance.endpoint}}"

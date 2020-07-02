@@ -48,9 +48,9 @@
         timeout: 180
       loop: "{{ ec2.instances }}"
 
-    - name: Install PostgreSQL
-      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
-      state: present
+#    - name: Install PostgreSQL
+#      name: ['postgresql', 'postgresql-contrib', 'python3-psycopg2']
+#      state: present
 #      tags:
 #        - packages
 #    - name: display multiple file contents
