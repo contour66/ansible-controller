@@ -39,8 +39,8 @@
         login_user: "postgres"
         login_password: "postgres"
         name: "image_gallery"
-        no_password_changes: yes
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
+        no_password_changes: no
         priv: "CREATE/CONNECT"
         role_attr_flags: CREATEDB,SUPERUSER
       register: db_ig_user
