@@ -22,7 +22,7 @@
 
     - name: Connect to database
       postgresql_db:
-        name: imagegallery
+        name: image_gallery
         login_host: "{{host_name}}"
         login_user: postgres
         login_password: postgres
@@ -30,7 +30,7 @@
       register: db_ig
 
     - name: debug
-      debug: var=db_user
+      debug: var=db_ig
 
     - name:
       postgresql_table:
