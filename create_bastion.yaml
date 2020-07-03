@@ -10,6 +10,10 @@
     host_name: "{{ lookup('file', 'rds.txt')}}"
 
   tasks:
+    - - name: Wait until the all packages installed
+        wait_for:
+          path: packages_installed.txt
+
     - name: debug
       debug: var=ansible_python_interpreter
 

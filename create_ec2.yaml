@@ -27,7 +27,7 @@
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
         count_tag:
-          Name: ans_Db_sql
+          Name: provision_postgres_instance
       register: ec2
 
     - local_action: copy content="{{ ans_rds }}" dest=rds.txt
