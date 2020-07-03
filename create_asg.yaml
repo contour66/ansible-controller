@@ -8,7 +8,7 @@
   tasks:
     - name: Creat auto-scaling group
       ec2_asg:
-        name: ans-asg2
+        name: ans-asg3
         availability_zones: [ "{{ aws_region + 'a' }}", "{{ aws_region + 'c'}}" ]
         launch_template:
             version: '1'

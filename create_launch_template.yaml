@@ -8,7 +8,7 @@
   tasks:
     - name: Create an ec2 launch template
       ec2_launch_template:
-        name: "ansible_template2"
+        name: "ansible_template3"
         image_id: "ami-04e59c05167ea7bd5"
         key_name: zum
         instance_type: t2.micro
