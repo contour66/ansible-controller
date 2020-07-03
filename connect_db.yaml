@@ -36,13 +36,13 @@
       postgresql_user:
         db: "image_gallery"
         login_host: "{{host_name}}"
-        login_user: postgres
-        login_password: postgres
+        login_user: "postgres"
+        login_password: "postgres"
         name: "image_gallery"
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         no_password_changes: no
         priv: "CREATE/CONNECT"
-        role_attr_flags: CREATEDB,SUPERUSER
+        role_attr_flags: CREATEDB,NOSUPERUSER
       register: db_ig_user
 
     - name: Create table for image gallery
