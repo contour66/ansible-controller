@@ -39,7 +39,7 @@
         login_user: "postgres"
         login_password: "postgres"
         name: "image_gallery"
-        password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
+        password: "auburnmod5"
         no_password_changes: no
         priv: "CREATE/CONNECT"
         role_attr_flags: CREATEDB
@@ -62,7 +62,7 @@
         db: image_gallery
         login_host: "{{host_name}}"
         login_user: image_gallery
-        login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
+        login_password: "auburnmod5"
         name: users
         owner: image_gallery
         columns:
@@ -76,7 +76,7 @@
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
-        login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
+        login_password: "auburnmod5"
         query: insert into users (username, password, full_name) values ("dom", "fred", "sam");
       register: db_names
 
