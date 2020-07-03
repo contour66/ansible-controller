@@ -22,23 +22,23 @@
 
     - name: Connect to database
       postgresql_db:
-        name: image_gallery
+        name: "image_gallery"
         login_host: "{{host_name}}"
-        login_user: postgres
-        login_password: postgres
+        login_user: "postgres"
+        login_password: "postgres"
         state: present
       register: db_ig
 
-    - name: debug
-      debug: var=db_ig
+#    - name: debug
+#      debug: var=db_ig
 
     - name: Create user for image gallery
       postgresql_user:
-        db: image_gallery
+        db: "image_gallery"
         login_host: "{{host_name}}"
-        login_user: postgres
-        login_password: postgres
-        name: image_gallery
+        login_user: "postgres"
+        login_password: "postgres"
+        name: "image_gallery"
         no_password_changes: no
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         priv: "CREATE/CONNECT"
@@ -61,10 +61,10 @@
 
     - name: Insert query to image_gallery
       postgresql_query:
-        db: image_gallery
+        db: "image_gallery"
         login_host: "{{host_name}}"
-        login_user: image_gallery
+        login_user: "image_gallery"
         login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
-        query: insert into users (username, password, full_name) values(%s, %s, %s);
+        query: insert into users (username, password, full_name);
       register: db_columns
 
