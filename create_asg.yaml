@@ -12,7 +12,7 @@
         availability_zones: [ "{{ aws_region + 'a' }}", "{{ aws_region + 'c'}}" ]
         launch_template:
             version: '1'
-            launch_template_name: ansible_template
+            launch_template_name: ansible_template2
         min_size: 2
         max_size: 4
         desired_capacity: 2
