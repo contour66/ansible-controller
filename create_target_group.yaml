@@ -9,13 +9,13 @@
     - name: Create nlb target group
       elb_target_group:
         name: ans-tg
-        protocol: tcp
+        protocol: TCP
         port: 80
-        vpc_id: "{{vpc.vpc.id}}"
-        target_type: instance
+        vpc_id: "{{ vpc.vpc.id }}"
+#        target_type: instance
         state: present
-        wait_timeout: 300
-        wait: True
+#        wait_timeout: 300
+#        wait: True
 #        stickiness_type: source_ip
 #        stickiness_enabled: no
       register: ans_tg
