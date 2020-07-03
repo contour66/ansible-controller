@@ -42,9 +42,14 @@
         no_password_changes: no
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         priv: "CONNECT/image_gallery:ALL"
+      register: db_ig_user
 
-    - name:
+    - name: Create table for image gallery
       postgresql_table:
+        db: image_gallery
+        login_host: "{{host_name}}"
+        login_user: image_gallery
+        login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         name: users
         owner: image_gallery
         columns:
@@ -56,5 +61,9 @@
     - name: Insert query to image_gallery
       postgresql_query:
         db: image_gallery
+        login_host: "{{host_name}}"
+        login_user: image_gallery
+        login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         query: insert into users (username, password, full_name) values(%s, %s, %s);
+      register: db_columns
 
