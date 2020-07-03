@@ -1,51 +1,78 @@
-- hosts: bastion
-  become: true
+- hosts: localhost
   gather_facts: no
-  user: ec2-user
-  module_defaults:
-      group/aws:
-        region: "us-west-1"
   vars:
-    ansible_python_interpreter:  /usr/bin/python3
-    host_name: "{{ lookup('file', 'rds.txt')}}"
-
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
   tasks:
-    - name: Wait until the all packages installed
-      wait_for:
-        path: packages_installed.txt
 
-    - name: debug
-      debug: var=ansible_python_interpreter
+    - name: Add host to group
+      add_host:
+        name: "{{ ec2.tagged_instances[0].public_dns_name }}"
+        groups: bastion
+      #      loop: "{{ ec2.instances }}"
+      register: db_host
 
-    - name: debug
-      debug: var=host_name
 
-    - name: Connect to database
-      postgresql_db:
-        name: image_gallery
-        login_host: "{{host_name}}"
-        login_user: postgres
-        login_password: taco123
-        state: present
-      register: db_ig
+    - name: Wait for SSH to come up
+      delegate_to: "{{ item.public_dns_name }}"
+      wait_for_connection:
+        delay: 30
+        timeout: 180
+      loop: "{{ ec2.instances }}"
 
-    - name: debug
-      debug: var=db_user
 
-    - name:
-      postgresql_table:
-        name: users
-        owner: image_gallery
-        columns:
-          - username varchar(100) primary key
-          - password varchar(100)
-          - full_name varchar(100)
-      register: users_table
-
-    - name: Insert query to image_gallery
-      postgresql_query:
-        db: image_gallery
-        query: insert into users (username, password, full_name) values(%s, %s, %s);
+#
+#
+#- hosts: bastion
+#  become: true
+#  gather_facts: no
+#  user: ec2-user
+#  module_defaults:
+#      group/aws:
+#        region: "us-west-1"
+#  vars:
+#    ansible_python_interpreter:  /usr/bin/python3
+#    host_name: "{{ lookup('file', 'rds.txt')}}"
+#
+#  tasks:
+#    - name: Wait until the all packages installed
+#      wait_for:
+#        path: packages_installed.txt
+#
+#    - name: debug
+#      debug: var=ansible_python_interpreter
+#
+#    - name: debug
+#      debug: var=host_name
+#
+#    - name: Connect to database
+#      postgresql_db:
+#        name: image_gallery
+#        login_host: "{{host_name}}"
+#        login_user: postgres
+#        login_password: taco123
+#        state: present
+#      register: db_ig
+#
+#    - name: debug
+#      debug: var=db_user
+#
+#    - name:
+#      postgresql_table:
+#        name: users
+#        owner: image_gallery
+#        columns:
+#          - username varchar(100) primary key
+#          - password varchar(100)
+#          - full_name varchar(100)
+#      register: users_table
+#
+#    - name: Insert query to image_gallery
+#      postgresql_query:
+#        db: image_gallery
+#        query: insert into users (username, password, full_name) values(%s, %s, %s);
 
 
     #    - name: Insert query to image_gallery

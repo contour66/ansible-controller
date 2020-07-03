@@ -30,24 +30,24 @@
           Name: provision_postgres_instance
       register: ec2
 
-    - local_action: copy content="{{ ans_rds }}" dest=rds.txt
+
     #    - name: debug
     #      debug: var=db_sql
     #
-    - name: Add host to group
-      add_host:
-        name: "{{ ec2.tagged_instances[0].public_dns_name }}"
-        groups: bastion
-      #      loop: "{{ ec2.instances }}"
-      register: db_host
-
-
-    - name: Wait for SSH to come up
-      delegate_to: "{{ item.public_dns_name }}"
-      wait_for_connection:
-        delay: 30
-        timeout: 180
-      loop: "{{ ec2.instances }}"
+#    - name: Add host to group
+#      add_host:
+#        name: "{{ ec2.tagged_instances[0].public_dns_name }}"
+#        groups: bastion
+#      #      loop: "{{ ec2.instances }}"
+#      register: db_host
+#
+#
+#    - name: Wait for SSH to come up
+#      delegate_to: "{{ item.public_dns_name }}"
+#      wait_for_connection:
+#        delay: 30
+#        timeout: 180
+#      loop: "{{ ec2.instances }}"
 
 
 
