@@ -3,8 +3,8 @@
   gather_facts: no
   user: ec2-user
   module_defaults:
-      group/aws:
-        region: "us-west-1"
+    group/aws:
+      region: "us-west-1"
   vars:
     ansible_python_interpreter:  /usr/bin/python3
     host_name: "{{ lookup('file', 'rds.txt')}}"
@@ -29,8 +29,8 @@
         state: present
       register: db_ig
 
-#    - name: debug
-#      debug: var=db_ig
+    #    - name: debug
+    #      debug: var=db_ig
 
     - name: Create user for image gallery
       postgresql_user:
@@ -42,8 +42,20 @@
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         no_password_changes: no
         priv: "CREATE/CONNECT"
-        role_attr_flags: CREATEDB,NOSUPERUSER
+        role_attr_flags: CREATEDB
       register: db_ig_user
+
+
+
+
+    - name: Grant roles to postgres
+      postgresql_query:
+        db: "image_gallery"
+        login_host: "{{host_name}}"
+        login_user: "postgres"
+        login_password: "postgres"
+        query: grant image_gallery to postgres
+      register: grant_role
 
     - name: Create table for image gallery
       postgresql_table:
