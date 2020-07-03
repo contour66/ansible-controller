@@ -35,10 +35,13 @@
     - name: Create user for image gallery
       postgresql_user:
         db: image_gallery
+        login_host: "{{host_name}}"
+        login_user: postgres
+        login_password: postgres
         name: image_gallery
+        no_password_changes: no
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         priv: "CONNECT/image_gallery:ALL"
-
 
     - name:
       postgresql_table:
