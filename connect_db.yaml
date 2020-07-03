@@ -77,7 +77,7 @@
         login_host: "{{host_name}}"
         login_user: "image_gallery"
         login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
-        query: insert into table users (username, password, full_name) values ("dom", "fred", "sam");
+        query: insert into users (username, password, full_name) values ("dom", "fred", "sam");
       register: db_names
 
     - name: debug
