@@ -41,7 +41,8 @@
         name: image_gallery
         no_password_changes: no
         password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
-        priv: "CONNECT/image_gallery:ALL"
+        priv: CREATE', 'CONNECT'
+        role_attr_flags: CREATEDB,NOSUPERUSER
       register: db_ig_user
 
     - name: Create table for image gallery
