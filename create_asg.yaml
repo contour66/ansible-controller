@@ -19,5 +19,6 @@
         vpc_zone_identifier:
           - "{{public_subnet_1.subnet.id}}"
           - "{{public_subnet_2.subnet.id}}"
-        wait: yes
+        wait_timeout: 200
+
       register: ans_asg
