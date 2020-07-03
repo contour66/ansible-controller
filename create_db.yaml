@@ -29,8 +29,8 @@
         zone: "{{ aws_region + 'a' }}"
         subnet: ans-rds-subnet
         vpc_security_groups:  "{{postgres_sg.group_id}}"
-        username: image_gallery
-        password: password: "{{ lookup('aws_secret', 'DbSecret') }}"
+        username: postgres
+        password: postgres
 #        wait: yes
         tags:
           name: ansible_db
