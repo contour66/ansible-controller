@@ -8,7 +8,7 @@
   tasks:
     - name: Create nlb target group
       elb_target_group:
-        name: ans-tg
+        name: ans-tg2
         protocol: TCP
         port: 80
         vpc_id: "{{ vpc.vpc.id }}"
