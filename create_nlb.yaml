@@ -6,9 +6,9 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - name: Create netowrk load balancer
+    - name: Create network load balancer
       elb_network_lb:
-        name: ans-nlb
+        name: ans-nlb2
         region: "{{ aws_region }}"
         subnet_mappings:
           - SubnetId: "{{public_subnet_1.subnet.id}}"
