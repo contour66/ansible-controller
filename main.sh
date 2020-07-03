@@ -73,5 +73,8 @@ systemctl disable postfix
 systemctl start nginx
 systemctl enable nginx
 
+ansible-playbook create_all.yaml
+
+
 #su ec2-user -l -c "cd ~/python-image-gallery && ./start" >/var/log/image_gallery.log 2>&1 &
 
