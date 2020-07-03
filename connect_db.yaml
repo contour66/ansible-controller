@@ -71,12 +71,17 @@
           - full_name varchar(100)
       register: users_table
 
-    - name: Insert query to image_gallery
+    - name: Insert names to image_gallery
       postgresql_query:
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
         login_password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
-        query: insert into users (username, password, full_name);
-      register: db_columns
+        query: insert into users ("dom", "fred", "sam");
+      register: db_names
+
+    - name: debug
+      debug: var=db_names
+
+
 
