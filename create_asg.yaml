@@ -8,11 +8,11 @@
   tasks:
     - name: Creat auto-scaling group
       ec2_asg:
-        name: ans-asg3
+        name: ans-asg4
         availability_zones: [ "{{ aws_region + 'a' }}", "{{ aws_region + 'c'}}" ]
         launch_template:
             version: '1'
-            launch_template_name: "ansible_template3"
+            launch_template_name: "ansible_template4"
         min_size: 2
         max_size: 4
         desired_capacity: 2
