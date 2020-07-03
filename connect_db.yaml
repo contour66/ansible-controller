@@ -32,6 +32,14 @@
     - name: debug
       debug: var=db_ig
 
+    - name: Create user for image gallery
+      postgresql_user:
+        db: image_gallery
+        name: image_gallery
+        password: "{{ pg_user_pass }}"
+        priv: "CONNECT/image_gallery:ALL"
+
+
     - name:
       postgresql_table:
         name: users
