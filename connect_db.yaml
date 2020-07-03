@@ -36,7 +36,7 @@
       postgresql_user:
         db: image_gallery
         name: image_gallery
-        password: "{{ pg_user_pass }}"
+        password: "{{ lookup('aws_secret', 'sec-mod-5')}}"
         priv: "CONNECT/image_gallery:ALL"
 
 
