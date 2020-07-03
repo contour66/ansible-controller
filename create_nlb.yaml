@@ -24,6 +24,8 @@
               - Type: forward
                 TargetGroupName: "{{ans_tg.target_group_name}}"
         state: present
+        wait: yes
+        wait_timeout: 30
       register: ans_nlb
     - name: debug
       debug: var=ans_nlb

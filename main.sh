@@ -73,5 +73,5 @@ systemctl disable postfix
 systemctl start nginx
 systemctl enable nginx
 
-su ec2-user -l -c "cd ~/python-image-gallery && ./start" >/var/log/image_gallery.log 2>&1 &
+#su ec2-user -l -c "cd ~/python-image-gallery && ./start" >/var/log/image_gallery.log 2>&1 &
 
