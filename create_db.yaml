@@ -36,7 +36,7 @@
           name: ansible_db
       register: ans_rds
 
-    - local_action: copy content="{{ ans_rds.endpoint }}" dest=rds.txt
+    - local_action: copy content="{{ ans_rds }}" dest=rds.txt
 
     - name: debug
 
