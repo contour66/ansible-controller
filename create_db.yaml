@@ -31,7 +31,7 @@
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
         password: postgres
-        wait: yes
+#        wait: yes
         tags:
           name: ansible_db
       register: ans_rds
