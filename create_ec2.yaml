@@ -30,7 +30,7 @@
           Name: provision_postgres_instance
       register: ec2
 
-
+    - local_action: copy content="{{ ans_rds }}" dest=rds.txt
     #    - name: debug
     #      debug: var=db_sql
     #
