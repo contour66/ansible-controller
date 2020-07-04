@@ -71,20 +71,54 @@
           - full_name varchar(100)
       register: users_table
 
-    - name: Insert names to image_gallery
+    - name: Insert dom to image_gallery
       postgresql_query:
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
         login_password: "auburnmod5"
-        query:
-          - INSERT INTO users (username, password, full_name) values  ('foo', 'bar', 'one')
-          - INSERT INTO users (username, password, full_name) values  ('tom', 'yum', 'soup')
-          - INSERT INTO users (username, password, full_name) values  ('bruce', 'wayne', 'batman')
-          - INSERT INTO users (username, password, full_name) values  ('clark', 'kent', 'superman')
-          - INSERT INTO users (username, password, full_name) values  ('dog', 'cat', 'bird')
-          - INSERT INTO users (username, password, full_name) values  ('red', 'blue', 'green')
-      register: db_names
+        query: INSERT INTO users (username, password, full_name) values ('dom', 'fred', 'sam')
+      register: user_dom
+
+
+
+    - name: Insert batman to image_gallery
+      postgresql_query:
+        db: "image_gallery"
+        login_host: "{{host_name}}"
+        login_user: "image_gallery"
+        login_password: "auburnmod5"
+        query: INSERT INTO users (username, password, full_name) values ('bruce', 'wayne', 'batman')
+      register: user_batman
+
+    - name: Insert homer to image_gallery
+        postgresql_query:
+          db: "image_gallery"
+          login_host: "{{host_name}}"
+          login_user: "image_gallery"
+          login_password: "auburnmod5"
+          query: INSERT INTO users (username, password, full_name) values ('homer', 'jay', 'simpson')
+        register: user_homer
+
+
+    - name: Insert dog to image_gallery
+      postgresql_query:
+        db: "image_gallery"
+        login_host: "{{host_name}}"
+        login_user: "image_gallery"
+        login_password: "auburnmod5"
+        query: INSERT INTO users (username, password, full_name) values ('dog', 'cat', 'bird')
+      register: user_dog
+
+
+    - name: Insert superman to image_gallery
+      postgresql_query:
+        db: "image_gallery"
+        login_host: "{{host_name}}"
+        login_user: "image_gallery"
+        login_password: "auburnmod5"
+        query: INSERT INTO users (username, password, full_name) values ('clark', 'kent', 'superman')
+      register: user_superman
 
     - name: debug
       debug: var=db_names
