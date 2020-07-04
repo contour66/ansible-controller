@@ -11,11 +11,11 @@
 - import_playbook: create_nacl.yaml
 
 #- import_playbook: create_db.yaml
-- import_playbook: create_launch_template.yaml
-- import_playbook: create_target_group.yaml
-- import_playbook: create_eip.yaml
-- import_playbook: create_nlb.yaml
-- import_playbook: create_asg.yaml
+#- import_playbook: create_launch_template.yaml
+#- import_playbook: create_target_group.yaml
+#- import_playbook: create_eip.yaml
+#- import_playbook: create_nlb.yaml
+#- import_playbook: create_asg.yaml
 
 - import_playbook: create_bastion.yaml
 - import_playbook: connect_db.yaml
