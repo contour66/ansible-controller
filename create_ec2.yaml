@@ -37,8 +37,8 @@
       debug: var=copy_rds
     #
 
-
-    - name: sleep for 300 seconds and continue with play
-      wait_for:
-        timeout: 300
+#
+#    - name: sleep for 300 seconds and continue with play
+#      wait_for:
+#        timeout: 300
 
