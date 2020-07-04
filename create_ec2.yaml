@@ -30,7 +30,7 @@
           Name: devel_instance
       register: ec2
 
-    - local_action: copy content="{{ devel_rds.instance.endpoint }}" dest=rds.txt
+    - local_action: copy content="{{ ans_rds.instance.endpoint }}" dest=rds.txt
       register: copy_rds
 #    - local_action: copy content="{{ ans_rds.publi }}" dest=rds.txt
     - name: debug
