@@ -71,14 +71,14 @@
           - full_name varchar(100)
       register: users_table
 
-    - name: Insert dom to image_gallery
-      postgresql_query:
-        db: "image_gallery"
-        login_host: "{{host_name}}"
-        login_user: "image_gallery"
-        login_password: "auburnmod5"
-        query: INSERT INTO users (username, password, full_name) values ('dom', 'fred', 'sam')
-      register: user_dom
+#    - name: Insert dom to image_gallery
+#      postgresql_query:
+#        db: "image_gallery"
+#        login_host: "{{host_name}}"
+#        login_user: "image_gallery"
+#        login_password: "auburnmod5"
+#        query: INSERT INTO users (username, password, full_name) values ('dom', 'fred', 'sam')
+#      register: user_dom
 
 
 
