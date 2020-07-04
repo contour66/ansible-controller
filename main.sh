@@ -10,7 +10,11 @@ sudo pip3 install boto #--user
 sudo pip3 install botocore #--user
 sudo pip3 install postgresql
 sudo pip3 install ansible #--user
-sudo pip3 install psycopg2 #--user
+sudo pip3 install psycopg2 #
+sudo pip3 install uwsgi
+sudo pip3 install flask
+
+# --user
 sudo yum install -y git
 sudo yum install -y jq #
 sudo pip3 install  --user psycopg2
