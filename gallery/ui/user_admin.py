@@ -148,7 +148,7 @@ def main():
                 print("Invalid")
     finally:
         connection.close()
-
+l
     # res = execute("update users set password=%s where username='fred'", ('banana',))
     # res = execute('select * from users;')
 

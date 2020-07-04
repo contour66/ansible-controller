@@ -20,30 +20,38 @@
     - name: debug
       debug: var=host_name
 
+    - name: Get Postgres Secret
+      set_fact: dbpassword="{{ lookup('aws_secret', 'sec-mod5-new', region='us-west-1') }}"
+    register: ig_pw
+
+    - name: Get Postgres Secret
+      set_fact: dbpassword="{{ lookup('aws_secret', 'sec-mod5-new', region='us-west-1') }}"
+    register: ig_pw
+
     - name: Connect to database
       postgresql_db:
         name: "image_gallery"
         login_host: "{{host_name}}"
-        login_user: "postgres"
-        login_password: "postgres"
+        login_user: "image_gallery"
+        login_password: "{{ig_pw.password}}"
         state: present
       register: db_ig
 
     #    - name: debug
     #      debug: var=db_ig
 
-    - name: Create user for image gallery
-      postgresql_user:
-        db: "image_gallery"
-        login_host: "{{host_name}}"
-        login_user: "postgres"
-        login_password: "postgres"
-        name: "image_gallery"
-        password: "auburnmod5"
-        no_password_changes: no
-        priv: "CREATE/CONNECT"
-        role_attr_flags: CREATEDB
-      register: db_ig_user
+#    - name: Create user for image gallery
+#      postgresql_user:
+#        db: "image_gallery"
+#        login_host: "{{host_name}}"
+#        login_user: "postgres"
+#        login_password: "postgres"
+#        name: "image_gallery"
+#        password: "auburnmod5"
+#        no_password_changes: no
+#        priv: "CREATE/CONNECT"
+#        role_attr_flags: CREATEDB
+#      register: db_ig_user
 
 
 
@@ -62,7 +70,7 @@
         db: image_gallery
         login_host: "{{host_name}}"
         login_user: image_gallery
-        login_password: "auburnmod5"
+        login_password: "{{ig_pw.password}}"
         name: users
         owner: image_gallery
         columns:
@@ -87,7 +95,7 @@
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
-        login_password: "auburnmod5"
+        login_password: "{{ig_pw.password}}"
         query: INSERT INTO users (username, password, full_name) values ('bruce', 'wayne', 'batman')
       register: user_batman
 
@@ -96,7 +104,7 @@
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
-        login_password: "auburnmod5"
+        login_password: "{{ig_pw.password}}"
         query: INSERT INTO users (username, password, full_name) values ('homer', 'jay', 'simpson')
       register: user_homer
 
@@ -106,7 +114,7 @@
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
-        login_password: "auburnmod5"
+        login_password: "{{ig_pw.password}}"
         query: INSERT INTO users (username, password, full_name) values ('dog', 'cat', 'bird')
       register: user_dog
 
@@ -116,7 +124,7 @@
         db: "image_gallery"
         login_host: "{{host_name}}"
         login_user: "image_gallery"
-        login_password: "auburnmod5"
+        login_password: "{{ig_pw.password}}"
         query: INSERT INTO users (username, password, full_name) values ('clark', 'kent', 'superman')
       register: user_superman
 

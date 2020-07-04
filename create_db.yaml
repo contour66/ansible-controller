@@ -16,6 +16,9 @@
           - "{{private_subnet_2.subnet.id}}"
       register: rds_sng
 
+    - name: Get Postgres Secret
+        set_fact: dbpassword="{{ lookup('aws_secret', 'sec-mod5-new', region='us-west-1') }}"
+      register: db_pw
 
     - name: Create db
       rds:
@@ -30,7 +33,7 @@
         subnet: ans-rds-subnet
         vpc_security_groups:  "{{postgres_sg.group_id}}"
         username: postgres
-        password: postgres
+        password: "{{db_pw.password}}"
 #        wait: yes
         tags:
           name: ansible_db
