@@ -77,7 +77,13 @@
         login_host: "{{host_name}}"
         login_user: "image_gallery"
         login_password: "auburnmod5"
-        query: INSERT INTO users (username, password, full_name) values (%s, %s, %s), ('foo', 'bar', 'one')
+        query:
+          - INSERT INTO users (username, password, full_name) values  ('foo', 'bar', 'one')
+          - INSERT INTO users (username, password, full_name) values  ('tom', 'yum', 'soup')
+          - INSERT INTO users (username, password, full_name) values  ('bruce', 'wayne', 'batman')
+          - INSERT INTO users (username, password, full_name) values  ('clark', 'kent', 'superman')
+          - INSERT INTO users (username, password, full_name) values  ('dog', 'cat', 'bird')
+          - INSERT INTO users (username, password, full_name) values  ('red', 'blue', 'green')
       register: db_names
 
     - name: debug
