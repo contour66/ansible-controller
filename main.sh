@@ -67,16 +67,13 @@ aws s3 cp s3://${CONFIG_BUCKET}/nginx/nginx.conf /etc/nginx
 aws s3 cp s3://${CONFIG_BUCKET}/nginx/default.d/image_gallery.conf /etc/nginx/default.d
 aws s3 cp s3://${CONFIG_BUCKET}/nginx/index.html /usr/share/nginx/html
 chown nginx:nginx /usr/share/nginx/html/index.html
-
+cd
 # Start/enable services
 systemctl stop postfix
 systemctl disable postfix
 systemctl start nginx
 systemctl enable nginx
 
-cd /ansible-controller
-
-ansible-playbook create_all.yaml
 
 
 #su ec2-user -l -c "cd ~/python-image-gallery && ./start" >/var/log/image_gallery.log 2>&1 &
