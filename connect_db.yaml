@@ -92,13 +92,13 @@
       register: user_batman
 
     - name: Insert homer to image_gallery
-        postgresql_query:
-          db: "image_gallery"
-          login_host: "{{host_name}}"
-          login_user: "image_gallery"
-          login_password: "auburnmod5"
-          query: INSERT INTO users (username, password, full_name) values ('homer', 'jay', 'simpson')
-        register: user_homer
+      postgresql_query:
+        db: "image_gallery"
+        login_host: "{{host_name}}"
+        login_user: "image_gallery"
+        login_password: "auburnmod5"
+        query: INSERT INTO users (username, password, full_name) values ('homer', 'jay', 'simpson')
+      register: user_homer
 
 
     - name: Insert dog to image_gallery
