@@ -74,6 +74,8 @@ systemctl disable postfix
 systemctl start nginx
 systemctl enable nginx
 
+cd /ansible-controller
+
 ansible-playbook create_all.yaml
 
 
