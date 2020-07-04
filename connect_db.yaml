@@ -77,7 +77,7 @@
         login_host: "{{host_name}}"
         login_user: "image_gallery"
         login_password: "auburnmod5"
-        query: INSERT INTO users (username, password, full_name) values ('dom', 'fred', 'sam')
+        query: ("INSERT INTO users (username, password, full_name) values (%s, %s, %s)", ('foo', 'bar', 'one'))
       register: db_names
 
     - name: debug
