@@ -23,7 +23,7 @@
         image: "{{ ami_id }}"
         instance_profile_name: image-gallery-server-role
         instance_tags:
-          Name: provision_postgres_instance
+          Name: devel_instance
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
         count_tag:
