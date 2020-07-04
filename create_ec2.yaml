@@ -7,7 +7,7 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - name: Provision Db Instance
+    - name: Provision Ec2 Instance
       ec2:
         key_name: zum
         assign_public_ip: yes
@@ -27,13 +27,14 @@
         vpc_subnet_id: "{{ public_subnet_1.subnet.id }}"
         exact_count: 1
         count_tag:
-          Name: provision_postgres_instance
+          Name: devel_instance
       register: ec2
 
     - local_action: copy content="{{ ans_rds.instance.endpoint }}" dest=rds.txt
+      register: copy_rds
 #    - local_action: copy content="{{ ans_rds.publi }}" dest=rds.txt
-    #    - name: debug
-    #      debug: var=db_sql
+    - name: debug
+      debug: var=copy_rds
     #
 
 
